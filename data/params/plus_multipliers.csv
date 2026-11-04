@@ -1,9 +1,9 @@
 carrier,market,band_id,k_p10,k_p50,k_p90,n_obs,source_id,confidence,notes
-JAL,domestic,D1,1.0,1.15,1.6,0,PLUS_PRIOR,EST,閑散平日昼：基本〜小幅上乗せ
-JAL,domestic,D2,1.15,1.6,2.4,0,PLUS_PRIOR,EST,通常期：段階的上乗せ
-JAL,domestic,D3,1.6,2.4,3.5,0,PLUS_PRIOR,EST,金曜夜・月曜朝：予測残席が少なく高倍率。上限4.1〜4.7倍
-JAL,domestic,D4,2.4,3.3,4.1,0,PLUS_PRIOR,EST,"繁忙期：上限（那覇39,000/9,500=4.1倍）近傍に張り付く"
-JAL,international,D1,1.0,1.3,2.0,0,PLUS_PRIOR,EST,
-JAL,international,D2,1.2,1.8,3.0,0,PLUS_PRIOR,EST,
-JAL,international,D3,1.5,2.3,3.6,0,PLUS_PRIOR,EST,
-JAL,international,D4,2.5,3.6,6.0,0,PLUS_PRIOR,EST,"The Goal：ホノルルC 遠い日程で往復289,000（当時上限、基本の3.6倍）に張り付き"
+JAL,domestic,D1,1.0,1.1,1.5,2,PLUS_PRIOR,EST,"閑散平日昼：基本〜小幅上乗せ。観測：10月初旬平日の羽田-那覇で同日便に9,000（基本）と10,000（1.11倍）が混在"
+JAL,domestic,D2,1.05,1.4,2.2,2,PLUS_PRIOR,EST,"通常期：観測 羽田-那覇クラスJ 1か月前にPLUS16,000（基本11,000の1.45倍）"
+JAL,domestic,D3,1.4,2.2,3.4,0,PLUS_PRIOR,EST,金曜夜・月曜朝：予測残席が少なく高倍率（便単位の実測は未取得）
+JAL,domestic,D4,2.0,3.0,4.5,3,PLUS_PRIOR,EST,"繁忙期：解説『お盆は片道2〜3万マイル以上』（9,500の2.1〜3.2倍）、奄美往復60,000（片道基本9,000の3.3倍）。上限 那覇49,000/9,500=5.2倍"
+JAL,international,D1,1.0,1.3,2.0,0,PLUS_PRIOR,EST,基本枠で取れる日は少なく（ソウルY 360日中15日）、小幅PLUSが常態
+JAL,international,D2,1.1,1.6,2.6,1,PLUS_PRIOR,EST,"観測：羽田-NY ビジネス『最少でも75,000』（基本55,000の1.36倍、2025-26）"
+JAL,international,D3,1.4,2.2,3.6,0,PLUS_PRIOR,EST,
+JAL,international,D4,2.5,4.0,7.0,2,PLUS_PRIOR,EST,"観測：ホノルルC お盆 往復367,000（旧基本80,000の4.6倍）、人気日程『54万マイル以上』（6.8倍）。上限 ホノルルC 8.8倍"

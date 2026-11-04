@@ -3,7 +3,7 @@ ANA,東京-シドニー,C,True,True,True,True
 ANA,東京-シドニー,Y,False,False,False,True
 ANA,東京-シンガポール,C,True,True,True,True
 ANA,東京-シンガポール,Y,False,False,False,False
-ANA,東京-ソウル,Y,False,False,True,True
+ANA,東京-ソウル,Y,False,False,False,True
 ANA,東京-ニューヨーク,C,True,True,True,True
 ANA,東京-ニューヨーク,F,True,True,True,True
 ANA,東京-ニューヨーク,PY,True,True,True,True
@@ -37,7 +37,7 @@ JAL,東京-ホノルル,C,True,True,True,True
 JAL,東京-ホノルル,PY,False,True,True,True
 JAL,東京-ホノルル,Y,False,False,False,False
 JAL,東京-ロンドン,C,True,True,True,True
-JAL,東京-ロンドン,F,False,True,True,True
+JAL,東京-ロンドン,F,True,True,True,True
 JAL,東京-ロンドン,PY,False,False,True,True
 JAL,東京-ロンドン,Y,False,False,False,False
 JAL,東京-台北,Y,False,False,False,True

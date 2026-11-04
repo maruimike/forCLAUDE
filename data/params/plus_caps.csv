@@ -1,8 +1,8 @@
 carrier,route_id,cabin,basis,cap_miles,source_id,confidence,notes
 JAL,HND-ITM,Y,ow,28000,JAL_DOM_PLUS_202610,A/C,ゾーンC上限（公式スニペット）。区間のゾーン所属は推定
-JAL,HND-FUK,Y,ow,37000,EST,EST,"ゾーンE上限は未取得。D 35,500とF 39,000の間と推定"
-JAL,HND-CTS,Y,ow,37000,EST,EST,同上
-JAL,HND-OKA,Y,ow,39000,JAL_DOM_MILES,A/C,"公式スニペット『東京–那覇 PLUS最大39,000』（クラスJ値混入の可能性あり）"
+JAL,HND-FUK,Y,ow,43500,JAL_DOM_PLUS_202610,A,"ゾーンE 普通席 基本8,500→PLUS〜43,500（公式表2026-10-26）"
+JAL,HND-CTS,Y,ow,43500,JAL_DOM_PLUS_202610,A,同上
+JAL,HND-OKA,Y,ow,49000,JAL_DOM_PLUS_202610,B,"ゾーンF 普通席 基本9,500→PLUS〜49,000（2026-10-01発券分〜。2024-07-11〜2026-09-30は44,500。51,000はクラスJ）"
 JAL,TYO-SEL,Y,ow,61000,JAL_INTL_PLUSCAP,B,公式表の大きい方の値／非公式シミュレーター転記と一致
 JAL,TYO-SEL,C,ow,79000,JAL_INTL_PLUSCAP,B,
 JAL,TYO-TPE,Y,ow,88000,JAL_INTL_PLUSCAP,B,"やじり鳥2024-06は87,000"

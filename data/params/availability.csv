@@ -15,27 +15,27 @@ ANA,international,premium,D1,0.45,0.25,0.65,AVAIL_PRIOR,EST,同上
 ANA,international,premium,D2,0.3,0.15,0.45,AVAIL_PRIOR,EST,同上
 ANA,international,premium,D3,0.2,0.1,0.35,AVAIL_PRIOR,EST,同上
 ANA,international,premium,D4,0.05,0.01,0.12,AVAIL_PRIOR,EST,同上
-ANA,international,business,D1,0.35,0.15,0.55,AVAIL_PRIOR,EST,ハワイ・北米ビジネスは『半年先でも取れない』『全席空席待ち』という報告
-ANA,international,business,D2,0.2,0.08,0.35,AVAIL_PRIOR,EST,ハワイ・北米ビジネスは『半年先でも取れない』『全席空席待ち』という報告
-ANA,international,business,D3,0.12,0.05,0.25,AVAIL_PRIOR,EST,ハワイ・北米ビジネスは『半年先でも取れない』『全席空席待ち』という報告
-ANA,international,business,D4,0.03,0.005,0.1,AVAIL_PRIOR,EST,ハワイ・北米ビジネスは『半年先でも取れない』『全席空席待ち』という報告
+ANA,international,business,D1,0.3,0.12,0.5,AVAIL_PRIOR,EST,長距離ビジネスの特典開放席は1便2〜4席程度（2026年解説）、空席待ち成功率は体験談で20〜50%・繁忙期ハワイCは10%以下
+ANA,international,business,D2,0.18,0.06,0.32,AVAIL_PRIOR,EST,長距離ビジネスの特典開放席は1便2〜4席程度（2026年解説）、空席待ち成功率は体験談で20〜50%・繁忙期ハワイCは10%以下
+ANA,international,business,D3,0.1,0.03,0.22,AVAIL_PRIOR,EST,長距離ビジネスの特典開放席は1便2〜4席程度（2026年解説）、空席待ち成功率は体験談で20〜50%・繁忙期ハワイCは10%以下
+ANA,international,business,D4,0.03,0.005,0.1,AVAIL_PRIOR,EST,長距離ビジネスの特典開放席は1便2〜4席程度（2026年解説）、空席待ち成功率は体験談で20〜50%・繁忙期ハワイCは10%以下
 ANA,international,first,D1,0.25,0.1,0.45,AVAIL_PRIOR,EST,ファーストは1機8席程度で特典枠はさらに少ない（mile-bible）
 ANA,international,first,D2,0.12,0.04,0.25,AVAIL_PRIOR,EST,ファーストは1機8席程度で特典枠はさらに少ない（mile-bible）
 ANA,international,first,D3,0.08,0.02,0.18,AVAIL_PRIOR,EST,ファーストは1機8席程度で特典枠はさらに少ない（mile-bible）
 ANA,international,first,D4,0.02,0.003,0.08,AVAIL_PRIOR,EST,ファーストは1機8席程度で特典枠はさらに少ない（mile-bible）
-JAL,international,economy,D1,0.55,0.35,0.75,AVAIL_PRIOR,EST,note集計『エコノミーの基本マイル日は存在するがビジネスは限られる』『基本マイル日は月の半分、全てGW後』
-JAL,international,economy,D2,0.35,0.2,0.55,AVAIL_PRIOR,EST,note集計『エコノミーの基本マイル日は存在するがビジネスは限られる』『基本マイル日は月の半分、全てGW後』
-JAL,international,economy,D3,0.25,0.1,0.4,AVAIL_PRIOR,EST,note集計『エコノミーの基本マイル日は存在するがビジネスは限られる』『基本マイル日は月の半分、全てGW後』
-JAL,international,economy,D4,0.05,0.01,0.15,AVAIL_PRIOR,EST,note集計『エコノミーの基本マイル日は存在するがビジネスは限られる』『基本マイル日は月の半分、全てGW後』
-JAL,international,premium,D1,0.4,0.2,0.6,AVAIL_PRIOR,EST,
-JAL,international,premium,D2,0.25,0.1,0.4,AVAIL_PRIOR,EST,
-JAL,international,premium,D3,0.15,0.05,0.3,AVAIL_PRIOR,EST,
-JAL,international,premium,D4,0.03,0.005,0.1,AVAIL_PRIOR,EST,
-JAL,international,business,D1,0.3,0.1,0.5,AVAIL_PRIOR,EST,The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る
-JAL,international,business,D2,0.15,0.05,0.3,AVAIL_PRIOR,EST,The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る
-JAL,international,business,D3,0.1,0.03,0.2,AVAIL_PRIOR,EST,The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る
-JAL,international,business,D4,0.02,0.003,0.08,AVAIL_PRIOR,EST,The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る
-JAL,international,first,D1,0.25,0.1,0.45,AVAIL_PRIOR,EST,ファーストはPLUS対象外・キャンセル待ち可。席数が少ない
-JAL,international,first,D2,0.12,0.04,0.25,AVAIL_PRIOR,EST,ファーストはPLUS対象外・キャンセル待ち可。席数が少ない
-JAL,international,first,D3,0.08,0.02,0.18,AVAIL_PRIOR,EST,ファーストはPLUS対象外・キャンセル待ち可。席数が少ない
-JAL,international,first,D4,0.02,0.003,0.08,AVAIL_PRIOR,EST,ファーストはPLUS対象外・キャンセル待ち可。席数が少ない
+JAL,international,economy,D1,0.3,0.1,0.5,JAL_AVAIL_SURVEY_2026,C/EST,1年先までの日別検索：東京→シドニーY 基本水準の日 87/365（24%）、東京→ソウルY 15/360（4%）。直前に基本枠が出る分を上乗せした事前分布
+JAL,international,economy,D2,0.2,0.05,0.35,JAL_AVAIL_SURVEY_2026,C/EST,1年先までの日別検索：東京→シドニーY 基本水準の日 87/365（24%）、東京→ソウルY 15/360（4%）。直前に基本枠が出る分を上乗せした事前分布
+JAL,international,economy,D3,0.12,0.03,0.25,JAL_AVAIL_SURVEY_2026,C/EST,1年先までの日別検索：東京→シドニーY 基本水準の日 87/365（24%）、東京→ソウルY 15/360（4%）。直前に基本枠が出る分を上乗せした事前分布
+JAL,international,economy,D4,0.03,0.005,0.1,JAL_AVAIL_SURVEY_2026,C/EST,1年先までの日別検索：東京→シドニーY 基本水準の日 87/365（24%）、東京→ソウルY 15/360（4%）。直前に基本枠が出る分を上乗せした事前分布
+JAL,international,premium,D1,0.15,0.03,0.3,JAL_AVAIL_SURVEY_2026,C/EST,東京→シドニーPY 基本水準の日 9/365
+JAL,international,premium,D2,0.08,0.02,0.2,JAL_AVAIL_SURVEY_2026,C/EST,東京→シドニーPY 基本水準の日 9/365
+JAL,international,premium,D3,0.05,0.01,0.15,JAL_AVAIL_SURVEY_2026,C/EST,東京→シドニーPY 基本水準の日 9/365
+JAL,international,premium,D4,0.02,0.003,0.06,JAL_AVAIL_SURVEY_2026,C/EST,東京→シドニーPY 基本水準の日 9/365
+JAL,international,business,D1,0.08,0.02,0.2,JAL_AVAIL_SURVEY_2026,C/EST,東京→シドニーC 基本水準の日 2/365。The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る
+JAL,international,business,D2,0.04,0.01,0.12,JAL_AVAIL_SURVEY_2026,C/EST,東京→シドニーC 基本水準の日 2/365。The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る
+JAL,international,business,D3,0.03,0.005,0.1,JAL_AVAIL_SURVEY_2026,C/EST,東京→シドニーC 基本水準の日 2/365。The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る
+JAL,international,business,D4,0.01,0.002,0.05,JAL_AVAIL_SURVEY_2026,C/EST,東京→シドニーC 基本水準の日 2/365。The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る
+JAL,international,first,D1,0.2,0.08,0.4,JAL_AVAIL_SURVEY_2026,C/EST,東京→シドニーF 最安水準の日 37/365（機材投入期間に集中）。PLUS対象外・キャンセル待ち可
+JAL,international,first,D2,0.1,0.03,0.22,JAL_AVAIL_SURVEY_2026,C/EST,東京→シドニーF 最安水準の日 37/365（機材投入期間に集中）。PLUS対象外・キャンセル待ち可
+JAL,international,first,D3,0.06,0.02,0.15,JAL_AVAIL_SURVEY_2026,C/EST,東京→シドニーF 最安水準の日 37/365（機材投入期間に集中）。PLUS対象外・キャンセル待ち可
+JAL,international,first,D4,0.02,0.003,0.08,JAL_AVAIL_SURVEY_2026,C/EST,東京→シドニーF 最安水準の日 37/365（機材投入期間に集中）。PLUS対象外・キャンセル待ち可

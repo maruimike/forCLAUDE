@@ -3,73 +3,73 @@ ANA,HND-ITM,*,PFC,ow,920,2026-09-01以降発券,ANA_PFC,A,羽田580＋伊丹340
 JAL,HND-ITM,*,PFC,ow,920,2026-09-01以降発券,JAL_PFC_FAQ,A,羽田580＋伊丹340
 ANA,HND-FUK,*,PFC,ow,690,2026-09-01以降発券,ANA_PFC,A/B,羽田580＋福岡110
 JAL,HND-FUK,*,PFC,ow,690,2026-09-01以降発券,JAL_PFC_FAQ,A/B,羽田580＋福岡110
-ANA,HND-CTS,*,PFC,ow,950,2026-09-01以降発券,ANA_PFC,A/C,羽田580＋新千歳370（2026-10-25改定後額は未取得）
-JAL,HND-CTS,*,PFC,ow,950,2026-09-01以降発券,JAL_PFC_FAQ,A/C,羽田580＋新千歳370（2026-10-25改定後額は未取得）
+ANA,HND-CTS,*,PFC,ow,1110,2026-09-01以降発券,ANA_PFC,A,羽田580＋新千歳530（2026-10-25以降発券分）
+JAL,HND-CTS,*,PFC,ow,1110,2026-09-01以降発券,JAL_PFC_FAQ,A,羽田580＋新千歳530（2026-10-25以降発券分）
 ANA,HND-OKA,*,PFC,ow,820,2026-09-01以降発券,ANA_PFC,A,羽田580＋那覇240
 JAL,HND-OKA,*,PFC,ow,820,2026-09-01以降発券,JAL_PFC_FAQ,A,羽田580＋那覇240
 ANA,TYO-SEL,*,fuel_surcharge,ow,7100,2026-11-01〜12-31発券,ANA_FUEL_2611,B,特典航空券にも同額（公式明記）
-ANA,TYO-SEL,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
-ANA,TYO-SEL,*,dest_taxes,rt,4500,2026,TAX_EST,EST,韓国出国税1万ウォン＋空港施設使用料の目安
+ANA,TYO-SEL,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
+ANA,TYO-SEL,*,dest_taxes,rt,2700,2026,TAX_EST,EST,"仁川 国際線旅客サービス料17,000ウォン＋出国納付金7,000ウォン＋1,000ウォン≈25,000ウォン（検証者推定）"
 JAL,TYO-SEL,*,fuel_surcharge,ow,7100,2026-11-01〜12-31発券,JAL_FUEL_2611,B,特典航空券にも同額（公式明記）
-JAL,TYO-SEL,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
-JAL,TYO-SEL,*,dest_taxes,rt,4500,2026,TAX_EST,EST,韓国出国税1万ウォン＋空港施設使用料の目安
+JAL,TYO-SEL,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
+JAL,TYO-SEL,*,dest_taxes,rt,2700,2026,TAX_EST,EST,"仁川 国際線旅客サービス料17,000ウォン＋出国納付金7,000ウォン＋1,000ウォン≈25,000ウォン（検証者推定）"
 ANA,TYO-TPE,*,fuel_surcharge,ow,15100,2026-11-01〜12-31発券,ANA_FUEL_2611,B,特典航空券にも同額（公式明記）
-ANA,TYO-TPE,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
-ANA,TYO-TPE,*,dest_taxes,rt,3500,2026,TAX_EST,EST,台湾空港税の目安
+ANA,TYO-TPE,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
+ANA,TYO-TPE,*,dest_taxes,rt,2400,2026,TAX_EST,EST,台湾 空港サービス料 NT$500 の目安
 JAL,TYO-TPE,*,fuel_surcharge,ow,15100,2026-11-01〜12-31発券,JAL_FUEL_2611,B,特典航空券にも同額（公式明記）
-JAL,TYO-TPE,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
-JAL,TYO-TPE,*,dest_taxes,rt,3500,2026,TAX_EST,EST,台湾空港税の目安
+JAL,TYO-TPE,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
+JAL,TYO-TPE,*,dest_taxes,rt,2400,2026,TAX_EST,EST,台湾 空港サービス料 NT$500 の目安
 ANA,TYO-BKK,*,fuel_surcharge,ow,32000,2026-11-01〜12-31発券,ANA_FUEL_2611,B,特典航空券にも同額（公式明記）
-ANA,TYO-BKK,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
-ANA,TYO-BKK,*,dest_taxes,rt,4500,2026,TAX_EST,EST,タイ空港使用料の目安
+ANA,TYO-BKK,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
+ANA,TYO-BKK,*,dest_taxes,rt,5600,2026,TAX_EST,A,"AOT 国際線旅客サービス料 1,120バーツ（2026-06-20以降発券分）"
 JAL,TYO-BKK,*,fuel_surcharge,ow,32000,2026-11-01〜12-31発券,JAL_FUEL_2611,B,特典航空券にも同額（公式明記）
-JAL,TYO-BKK,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
-JAL,TYO-BKK,*,dest_taxes,rt,4500,2026,TAX_EST,EST,タイ空港使用料の目安
+JAL,TYO-BKK,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
+JAL,TYO-BKK,*,dest_taxes,rt,5600,2026,TAX_EST,A,"AOT 国際線旅客サービス料 1,120バーツ（2026-06-20以降発券分）"
 ANA,TYO-SIN,*,fuel_surcharge,ow,32000,2026-11-01〜12-31発券,ANA_FUEL_2611,B,特典航空券にも同額（公式明記）
-ANA,TYO-SIN,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
+ANA,TYO-SIN,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
 ANA,TYO-SIN,*,dest_taxes,rt,8000,2026,TAX_EST,EST,チャンギ空港税の目安
 JAL,TYO-SIN,*,fuel_surcharge,ow,32000,2026-11-01〜12-31発券,JAL_FUEL_2611,B,特典航空券にも同額（公式明記）
-JAL,TYO-SIN,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
+JAL,TYO-SIN,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
 JAL,TYO-SIN,*,dest_taxes,rt,8000,2026,TAX_EST,EST,チャンギ空港税の目安
 ANA,TYO-HNL,*,fuel_surcharge,ow,38500,2026-11-01〜12-31発券,ANA_FUEL_2611,B,特典航空券にも同額（公式明記）
-ANA,TYO-HNL,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
-ANA,TYO-HNL,*,dest_taxes,rt,11500,2026,TAX_EST,C,"ブログ実例：ハワイ往復エコ 諸税11,000〜12,000円（燃油除く、日本側含む可能性）"
+ANA,TYO-HNL,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
+ANA,TYO-HNL,*,dest_taxes,rt,11300,2026,TAX_EST,A/EST,"米国連邦税・料金：到着/出発税$23.40×2＋APHIS$3.84＋税関$7.39＋入国審査$7.00（＝$65）＋PFC$4.5＋9/11料$5.6 ≈ $75 ≈ 11,300円"
 JAL,TYO-HNL,*,fuel_surcharge,ow,38500,2026-11-01〜12-31発券,JAL_FUEL_2611,B,特典航空券にも同額（公式明記）
-JAL,TYO-HNL,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
-JAL,TYO-HNL,*,dest_taxes,rt,11500,2026,TAX_EST,C,"ブログ実例：ハワイ往復エコ 諸税11,000〜12,000円（燃油除く、日本側含む可能性）"
+JAL,TYO-HNL,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
+JAL,TYO-HNL,*,dest_taxes,rt,11300,2026,TAX_EST,A/EST,"米国連邦税・料金：到着/出発税$23.40×2＋APHIS$3.84＋税関$7.39＋入国審査$7.00（＝$65）＋PFC$4.5＋9/11料$5.6 ≈ $75 ≈ 11,300円"
 ANA,TYO-NYC,*,fuel_surcharge,ow,62000,2026-11-01〜12-31発券,ANA_FUEL_2611,B,特典航空券にも同額（公式明記）
-ANA,TYO-NYC,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
-ANA,TYO-NYC,*,dest_taxes,rt,13000,2026,TAX_EST,C/EST,"米国 国際到着税・税関・入国審査・APHIS・PFC の目安。ZIPAIR LA往復諸税15,910円（日本側含む）と整合"
+ANA,TYO-NYC,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
+ANA,TYO-NYC,*,dest_taxes,rt,11300,2026,TAX_EST,A/EST,同上（米国連邦税・料金の積算）
 JAL,TYO-NYC,*,fuel_surcharge,ow,62000,2026-11-01〜12-31発券,JAL_FUEL_2611,B,特典航空券にも同額（公式明記）
-JAL,TYO-NYC,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
-JAL,TYO-NYC,*,dest_taxes,rt,13000,2026,TAX_EST,C/EST,"米国 国際到着税・税関・入国審査・APHIS・PFC の目安。ZIPAIR LA往復諸税15,910円（日本側含む）と整合"
+JAL,TYO-NYC,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
+JAL,TYO-NYC,*,dest_taxes,rt,11300,2026,TAX_EST,A/EST,同上（米国連邦税・料金の積算）
 ANA,TYO-LON,*,fuel_surcharge,ow,62000,2026-11-01〜12-31発券,ANA_FUEL_2611,B,特典航空券にも同額（公式明記）
-ANA,TYO-LON,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
-ANA,TYO-LON,*,dest_taxes,rt,30000,2026,TAX_EST,EST,英国APD（エコノミー）＋ヒースロー空港料金の目安。ビジネス以上はAPD高率で約2倍
+ANA,TYO-LON,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
+ANA,TYO-LON,*,dest_taxes,rt,29000,2026,TAX_EST,A/EST,"英国APD 2026-27 Band C reduced £106（エコノミー）≈21,200円＋ヒースロー空港料金の目安約8,000円"
 JAL,TYO-LON,*,fuel_surcharge,ow,62000,2026-11-01〜12-31発券,JAL_FUEL_2611,B,特典航空券にも同額（公式明記）
-JAL,TYO-LON,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
-JAL,TYO-LON,*,dest_taxes,rt,30000,2026,TAX_EST,EST,英国APD（エコノミー）＋ヒースロー空港料金の目安。ビジネス以上はAPD高率で約2倍
+JAL,TYO-LON,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
+JAL,TYO-LON,*,dest_taxes,rt,29000,2026,TAX_EST,A/EST,"英国APD 2026-27 Band C reduced £106（エコノミー）≈21,200円＋ヒースロー空港料金の目安約8,000円"
 ANA,TYO-SYD,*,fuel_surcharge,ow,62000,2026-11-01〜12-31発券,ANA_FUEL_2611,B,特典航空券にも同額（公式明記）
-ANA,TYO-SYD,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
-ANA,TYO-SYD,*,dest_taxes,rt,9000,2026,TAX_EST,EST,豪州出国税＋空港料金の目安
+ANA,TYO-SYD,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
+ANA,TYO-SYD,*,dest_taxes,rt,9000,2026,TAX_EST,C,"豪州出国税PMC＋空港使用料の目安 9,000〜11,000円"
 JAL,TYO-SYD,*,fuel_surcharge,ow,62000,2026-11-01〜12-31発券,JAL_FUEL_2611,B,特典航空券にも同額（公式明記）
-JAL,TYO-SYD,*,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,"成田PSFC2,460＋PSSC700＋国際観光旅客税1,000（羽田は2,950＋230＋1,000）。往復で出発時1回"
-JAL,TYO-SYD,*,dest_taxes,rt,9000,2026,TAX_EST,EST,豪州出国税＋空港料金の目安
+JAL,TYO-SYD,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
+JAL,TYO-SYD,*,dest_taxes,rt,9000,2026,TAX_EST,C,"豪州出国税PMC＋空港使用料の目安 9,000〜11,000円"
 ANA,TYO-LON,C,fuel_surcharge,ow,62000,2026-11-01〜12-31発券,ANA_FUEL_2611,B,
-ANA,TYO-LON,C,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,
-ANA,TYO-LON,C,dest_taxes,rt,55000,2026,TAX_EST,EST,英国APD上位クラス料率（エコノミーの約2倍）＋空港料金。ブログ実例『欧州ビジネス往復 諸税4〜6.5万円』と整合
+ANA,TYO-LON,C,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,
+ANA,TYO-LON,C,dest_taxes,rt,58000,2026,UK_APD_2026,A/EST,"英国APD 2026-27 Band C standard £253（PY/C/F）≈50,600円＋ヒースロー空港料金の目安約8,000円"
 ANA,TYO-LON,F,fuel_surcharge,ow,62000,2026-11-01〜12-31発券,ANA_FUEL_2611,B,
-ANA,TYO-LON,F,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,
-ANA,TYO-LON,F,dest_taxes,rt,55000,2026,TAX_EST,EST,英国APD上位クラス料率（エコノミーの約2倍）＋空港料金。ブログ実例『欧州ビジネス往復 諸税4〜6.5万円』と整合
+ANA,TYO-LON,F,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,
+ANA,TYO-LON,F,dest_taxes,rt,58000,2026,UK_APD_2026,A/EST,"英国APD 2026-27 Band C standard £253（PY/C/F）≈50,600円＋ヒースロー空港料金の目安約8,000円"
 ANA,TYO-LON,PY,fuel_surcharge,ow,62000,2026-11-01〜12-31発券,ANA_FUEL_2611,B,
-ANA,TYO-LON,PY,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,
-ANA,TYO-LON,PY,dest_taxes,rt,55000,2026,TAX_EST,EST,英国APD上位クラス料率（エコノミーの約2倍）＋空港料金。ブログ実例『欧州ビジネス往復 諸税4〜6.5万円』と整合
+ANA,TYO-LON,PY,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,
+ANA,TYO-LON,PY,dest_taxes,rt,58000,2026,UK_APD_2026,A/EST,"英国APD 2026-27 Band C standard £253（PY/C/F）≈50,600円＋ヒースロー空港料金の目安約8,000円"
 JAL,TYO-LON,C,fuel_surcharge,ow,62000,2026-11-01〜12-31発券,JAL_FUEL_2611,B,
-JAL,TYO-LON,C,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,
-JAL,TYO-LON,C,dest_taxes,rt,55000,2026,TAX_EST,EST,英国APD上位クラス料率（エコノミーの約2倍）＋空港料金。ブログ実例『欧州ビジネス往復 諸税4〜6.5万円』と整合
+JAL,TYO-LON,C,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,
+JAL,TYO-LON,C,dest_taxes,rt,58000,2026,UK_APD_2026,A/EST,"英国APD 2026-27 Band C standard £253（PY/C/F）≈50,600円＋ヒースロー空港料金の目安約8,000円"
 JAL,TYO-LON,F,fuel_surcharge,ow,62000,2026-11-01〜12-31発券,JAL_FUEL_2611,B,
-JAL,TYO-LON,F,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,
-JAL,TYO-LON,F,dest_taxes,rt,55000,2026,TAX_EST,EST,英国APD上位クラス料率（エコノミーの約2倍）＋空港料金。ブログ実例『欧州ビジネス往復 諸税4〜6.5万円』と整合
+JAL,TYO-LON,F,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,
+JAL,TYO-LON,F,dest_taxes,rt,58000,2026,UK_APD_2026,A/EST,"英国APD 2026-27 Band C standard £253（PY/C/F）≈50,600円＋ヒースロー空港料金の目安約8,000円"
 JAL,TYO-LON,PY,fuel_surcharge,ow,62000,2026-11-01〜12-31発券,JAL_FUEL_2611,B,
-JAL,TYO-LON,PY,jp_airport_fees_tax,rt,4100,2026,NRT_PSFC,A/C,
-JAL,TYO-LON,PY,dest_taxes,rt,55000,2026,TAX_EST,EST,英国APD上位クラス料率（エコノミーの約2倍）＋空港料金。ブログ実例『欧州ビジネス往復 諸税4〜6.5万円』と整合
+JAL,TYO-LON,PY,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,
+JAL,TYO-LON,PY,dest_taxes,rt,58000,2026,UK_APD_2026,A/EST,"英国APD 2026-27 Band C standard £253（PY/C/F）≈50,600円＋ヒースロー空港料金の目安約8,000円"

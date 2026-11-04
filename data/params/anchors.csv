@@ -1,12 +1,12 @@
 carrier,route_id,cabin,anchor_type,anchor_price_jpy,basis,blog_claim_yen_per_mile,source_id,confidence,notes
-ANA,HND-OKA,Y,フレックス（旧普通運賃）,52000,ow,4.5,ANCHOR_DOM_EST,EST,2026年公式運賃表PDFは取得不能。2024〜25年の普通運賃水準（約5〜5.7万円）からの推定。manekaiは普通運賃基準で4〜6円/マイルと主張
-JAL,HND-OKA,Y,フレックス（旧普通運賃）,52000,ow,5.0,ANCHOR_DOM_EST,EST,同上
-ANA,HND-FUK,Y,フレックス,46000,ow,4.0,ANCHOR_DOM_EST,EST,推定
-JAL,HND-FUK,Y,フレックス,46000,ow,4.0,ANCHOR_DOM_EST,EST,推定
-ANA,HND-CTS,Y,フレックス,42000,ow,4.0,ANCHOR_DOM_EST,EST,推定
-JAL,HND-CTS,Y,フレックス,42000,ow,4.0,ANCHOR_DOM_EST,EST,推定
-ANA,HND-ITM,Y,フレックス,30000,ow,3.0,ANCHOR_DOM_EST,EST,推定
-JAL,HND-ITM,Y,フレックス,30000,ow,3.0,ANCHOR_DOM_EST,EST,推定
+ANA,HND-OKA,Y,フレックス（旧普通運賃）,61300,ow,4.5,ANCHOR_DOM_2026,C,"JALフレックス羽田–那覇 61,300円（ローチケ旅行 2026-09更新）をANAにも適用。ANA公式PDF（2026-10-25〜搭乗）の東京=那覇行は最大82,610円の表示あり"
+JAL,HND-OKA,Y,フレックス（旧普通運賃）,61300,ow,5.0,ANCHOR_DOM_2026,C,"ローチケ旅行掲載 JALフレックス 羽田–那覇 61,300円（2026-09-09更新）。manekaiは普通運賃基準で4〜6円/マイルと主張"
+ANA,HND-FUK,Y,フレックス,54890,ow,4.0,ANCHOR_DOM_2026,C,"ANA新運賃『フレックス』東京–福岡 例示 54,890円〜（2026）。スターフライヤー普通運賃 54,780〜68,310円（公式）と整合"
+JAL,HND-FUK,Y,フレックス,54000,ow,4.0,ANCHOR_DOM_2026,C/EST,"JALカード割引 39,270円（フレックス連動、約27%引き）から逆算"
+ANA,HND-CTS,Y,フレックス,50760,ow,4.0,ANCHOR_DOM_2026,C,"ローチケ旅行掲載 フレックス 羽田–新千歳 50,760円"
+JAL,HND-CTS,Y,フレックス,50760,ow,4.0,ANCHOR_DOM_2026,C,"同上（JALカード割引 37,180円と整合）"
+ANA,HND-ITM,Y,フレックス,34450,ow,3.0,ANCHOR_DOM_2026,C,"ローチケ旅行掲載 フレックス 羽田–伊丹 34,450円（2026-09-09更新）"
+JAL,HND-ITM,Y,フレックス,34450,ow,3.0,ANCHOR_DOM_2026,C,同上
 ANA,TYO-HNL,C,正規ビジネス運賃（ブログ推計）,700000,rt,10.0,VALUATION_NOTE,C,note くまろぅちゃん『60万〜80万円』
 JAL,TYO-HNL,C,正規ビジネス運賃（ブログ推計）,700000,rt,8.0,VALUATION_NOTE,C,同上
 ANA,TYO-NYC,C,通常期ビジネス運賃サンプル,920000,rt,10.0,VALUATION_NOTE,C,"858,230〜983,230円（2025-12/2026-02サンプル）"
