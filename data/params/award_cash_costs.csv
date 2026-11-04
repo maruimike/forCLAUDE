@@ -16,7 +16,7 @@ JAL,TYO-SEL,*,dest_taxes,rt,2700,2026,TAX_EST,EST,"仁川 国際線旅客サー�
 ANA,TYO-TPE,*,fuel_surcharge,ow,15100,2026-11-01〜12-31発券,ANA_FUEL_2611,B,特典航空券にも同額（公式明記）
 ANA,TYO-TPE,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
 ANA,TYO-TPE,*,dest_taxes,rt,2400,2026,TAX_EST,EST,台湾 空港サービス料 NT$500 の目安
-JAL,TYO-TPE,*,fuel_surcharge,ow,15100,2026-11-01〜12-31発券,JAL_FUEL_2611,B,特典航空券にも同額（公式明記）
+JAL,TYO-TPE,*,fuel_surcharge,ow,16000,2026-11-01〜12-31発券,JAL_FUEL_2611,B,"特典航空券にも同額（公式明記）。JALの東アジア区分は16,000円（ANA 15,100円）"
 JAL,TYO-TPE,*,jp_airport_fees_tax,rt,6160,2026-07-01以降,NRT_PSFC,A,"成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"
 JAL,TYO-TPE,*,dest_taxes,rt,2400,2026,TAX_EST,EST,台湾 空港サービス料 NT$500 の目安
 ANA,TYO-BKK,*,fuel_surcharge,ow,32000,2026-11-01〜12-31発券,ANA_FUEL_2611,B,特典航空券にも同額（公式明記）

@@ -1,5 +1,5 @@
 """
-Real Purchasing Power Parity (RPP) model for ANA / JAL miles.
+Real Purchasing Power (RPP) model for ANA / JAL miles.
 
 For a traveller who wants a given trip (carrier x route x cabin x demand band), a mile is worth what it
 saves when used in the best available way.  Two explicit consumer profiles are evaluated:

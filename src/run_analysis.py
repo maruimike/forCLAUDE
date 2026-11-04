@@ -71,6 +71,20 @@ def main():
     summary.to_csv(tdir / "rpp_summary_by_case.csv", index=False)
     anchors.to_csv(tdir / "anchored_values.csv", index=False)
 
+    # Alternative band weighting (calendar share of days instead of the assumed traveller share) — robustness of the headline "加重" values.
+    if "calendar_share" in p.bands.columns:
+        alt = results.merge(p.bands[["band_id", "calendar_share"]], on="band_id", how="left")
+
+        def agg_alt(g):
+            w = g["calendar_share"] / g["calendar_share"].sum()
+            return pd.Series(dict(route_label=g["route_label"].iloc[0], rpp_N_wavg_calendar=(g["rpp_N"] * w).sum(), rpp_S_wavg_calendar=(g["rpp_S"] * w).sum()))
+
+        alt = alt.groupby(["carrier", "route_id", "cabin"]).apply(agg_alt, include_groups=False).reset_index()
+        alt = alt.merge(summary[["carrier", "route_id", "cabin", "rpp_N_wavg", "rpp_S_wavg"]], on=["carrier", "route_id", "cabin"], how="left")
+        alt["diff_N_calendar_minus_traveler"] = alt["rpp_N_wavg_calendar"] - alt["rpp_N_wavg"]
+        alt["diff_S_calendar_minus_traveler"] = alt["rpp_S_wavg_calendar"] - alt["rpp_S_wavg"]
+        alt.to_csv(tdir / "rpp_summary_alt_weights.csv", index=False)
+
     piv_N = pivot(results, "rpp_N"); piv_N.to_csv(tdir / "rpp_N_by_demand_band.csv", index=False)
     piv_S = pivot(results, "rpp_S"); piv_S.to_csv(tdir / "rpp_S_by_demand_band.csv", index=False)
     piv_aw = pivot(results, "rpp_award_N"); piv_aw.to_csv(tdir / "rpp_award_N_if_seat_obtained_by_band.csv", index=False)
@@ -211,7 +225,7 @@ def main():
         caps = p.plus_caps.copy()
         base = p.award_miles[(p.award_miles.carrier == "JAL") & (p.award_miles.season == "base")][["route_id", "cabin", "miles"]].rename(columns={"miles": "base_ow"})
         base = base.merge(p.routes[["route_id", "label_ja"]].rename(columns={"label_ja": "route_label"}), on="route_id")
-        charts.fig_plus_caps(caps[caps.carrier == "JAL"], base, fdir / "fig3b_jal_plus_caps.png")
+        charts.fig_plus_caps(caps[caps.carrier == "JAL"], base, fdir / "fig3_jal_plus_caps.png")
         tk_path = params_dir.parent / "observations" / "tokutabi_weekday_2026.csv"
         if tk_path.exists():
             charts.fig_tokutabi_weekday(pd.read_csv(tk_path), fdir / "fig8_ana_tokutabi_weekday.png")

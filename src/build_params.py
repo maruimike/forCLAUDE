@@ -162,10 +162,13 @@ dest_tax = {  # RT-equivalent JPY paid for destination side (arrival/departure t
     "TYO-LON": (29000, "A/EST", "英国APD 2026-27 Band C reduced £106（エコノミー）≈21,200円＋ヒースロー空港料金の目安約8,000円"),
     "TYO-SYD": (9000, "C", "豪州出国税PMC＋空港使用料の目安 9,000〜11,000円"),
 }
+jal_fuel_override = {"TYO-TPE": 16000}  # JAL 東アジア（中国・台湾・香港）片道16,000円（ANAは15,100円）
 for route, (f, conf) in fuel.items():
     for carrier in ("ANA", "JAL"):
         src = "ANA_FUEL_2611" if carrier == "ANA" else "JAL_FUEL_2611"
-        ac.append((carrier, route, "*", "fuel_surcharge", "ow", f, "2026-11-01〜12-31発券", src, conf, "特典航空券にも同額（公式明記）"))
+        f_c = jal_fuel_override.get(route, f) if carrier == "JAL" else f
+        note = "特典航空券にも同額（公式明記）" + ("。JALの東アジア区分は16,000円（ANA 15,100円）" if f_c != f else "")
+        ac.append((carrier, route, "*", "fuel_surcharge", "ow", f_c, "2026-11-01〜12-31発券", src, conf, note))
         ac.append((carrier, route, "*", "jp_airport_fees_tax", "rt", jp_side, "2026-07-01以降", "NRT_PSFC", "A", "成田PSFC2,460＋PSSC700＋国際観光旅客税3,000（2026-07-01以降出国分に引き上げ）。羽田は2,950＋3,000=5,950。往復で出発時1回"))
         d, dconf, dnote = dest_tax[route]
         ac.append((carrier, route, "*", "dest_taxes", "rt", d, "2026", "TAX_EST", dconf, dnote))
