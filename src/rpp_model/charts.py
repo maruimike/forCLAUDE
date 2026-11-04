@@ -154,7 +154,7 @@ def fig_montecarlo_ranges(mc: pd.DataFrame, out: Path, floor_rate_by_carrier: di
         ax.text(r.rpp_p90 + 0.08, i, f"{r.rpp_p50:.2f}", va="center", fontsize=8, color=INK2)
     for carrier, fr in floor_rate_by_carrier.items():
         ax.axvline(fr, color=ORANGE if carrier == "JAL" else AQUA, lw=1, ls="-", alpha=0.9,
-                   label=f"{carrier} 現金等価フロア {fr:.1f}円/マイル")
+                   label=f"{carrier} コイン/ポイント交換率 {fr:.1f}円/マイル（参考線）")
     ax.set_yticks(y)
     ax.set_yticklabels(df.label, fontsize=8.5)
     ax.set_xlabel("実質購買力 RPP（円/マイル）")

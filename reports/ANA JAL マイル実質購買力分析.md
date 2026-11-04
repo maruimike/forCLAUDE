@@ -311,7 +311,7 @@ python3 src/run_analysis.py      # output/tables/*.csv, output/figures/*.png, ou
 | `data/params/cash_alternatives.csv` | 需要帯別の現金代替価格（low/mode/high、同等性 same/near/lower、手数料・アクセス差、自社運賃フラグ） |
 | `data/params/availability.csv`・`plus_multipliers.csv` | 空席確率・PLUS倍率の事前分布 |
 | `data/params/floor_rates.csv`・`anchors.csv`・`fuel_scenarios.csv` | フロア換算率（coin/cash）、見せかけ換算のアンカー運賃、燃油シナリオ |
-| `data/sources.csv` | 出典IDと URL・掲載日・確度（42件） |
+| `data/sources.csv` | 出典IDと URL・掲載日・確度（44件） |
 | `data/observations/` | ギャップ調査の構造化データ470件と検証フラグ89件、トクたびマイルの曜日別マイル |
 | `output/tables/` | 46ケース×4需要帯の計算結果（両プロファイル）、モンテカルロ、感応度、燃油シナリオ、分解 |
 | `output/figures/` | 図1〜図9、トルネード図 |
