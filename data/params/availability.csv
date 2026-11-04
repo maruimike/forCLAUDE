@@ -19,6 +19,10 @@ ANA,international,business,D1,0.35,0.15,0.55,AVAIL_PRIOR,EST,ハワイ・北米�
 ANA,international,business,D2,0.2,0.08,0.35,AVAIL_PRIOR,EST,ハワイ・北米ビジネスは『半年先でも取れない』『全席空席待ち』という報告
 ANA,international,business,D3,0.12,0.05,0.25,AVAIL_PRIOR,EST,ハワイ・北米ビジネスは『半年先でも取れない』『全席空席待ち』という報告
 ANA,international,business,D4,0.03,0.005,0.1,AVAIL_PRIOR,EST,ハワイ・北米ビジネスは『半年先でも取れない』『全席空席待ち』という報告
+ANA,international,first,D1,0.25,0.1,0.45,AVAIL_PRIOR,EST,ファーストは1機8席程度で特典枠はさらに少ない（mile-bible）
+ANA,international,first,D2,0.12,0.04,0.25,AVAIL_PRIOR,EST,ファーストは1機8席程度で特典枠はさらに少ない（mile-bible）
+ANA,international,first,D3,0.08,0.02,0.18,AVAIL_PRIOR,EST,ファーストは1機8席程度で特典枠はさらに少ない（mile-bible）
+ANA,international,first,D4,0.02,0.003,0.08,AVAIL_PRIOR,EST,ファーストは1機8席程度で特典枠はさらに少ない（mile-bible）
 JAL,international,economy,D1,0.55,0.35,0.75,AVAIL_PRIOR,EST,note集計『エコノミーの基本マイル日は存在するがビジネスは限られる』『基本マイル日は月の半分、全てGW後』
 JAL,international,economy,D2,0.35,0.2,0.55,AVAIL_PRIOR,EST,note集計『エコノミーの基本マイル日は存在するがビジネスは限られる』『基本マイル日は月の半分、全てGW後』
 JAL,international,economy,D3,0.25,0.1,0.4,AVAIL_PRIOR,EST,note集計『エコノミーの基本マイル日は存在するがビジネスは限られる』『基本マイル日は月の半分、全てGW後』
@@ -31,3 +35,7 @@ JAL,international,business,D1,0.3,0.1,0.5,AVAIL_PRIOR,EST,The Goal：ホノル�
 JAL,international,business,D2,0.15,0.05,0.3,AVAIL_PRIOR,EST,The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る
 JAL,international,business,D3,0.1,0.03,0.2,AVAIL_PRIOR,EST,The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る
 JAL,international,business,D4,0.02,0.003,0.08,AVAIL_PRIOR,EST,The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る
+JAL,international,first,D1,0.25,0.1,0.45,AVAIL_PRIOR,EST,ファーストはPLUS対象外・キャンセル待ち可。席数が少ない
+JAL,international,first,D2,0.12,0.04,0.25,AVAIL_PRIOR,EST,ファーストはPLUS対象外・キャンセル待ち可。席数が少ない
+JAL,international,first,D3,0.08,0.02,0.18,AVAIL_PRIOR,EST,ファーストはPLUS対象外・キャンセル待ち可。席数が少ない
+JAL,international,first,D4,0.02,0.003,0.08,AVAIL_PRIOR,EST,ファーストはPLUS対象外・キャンセル待ち可。席数が少ない

@@ -53,12 +53,12 @@ write("routes.csv", ["route_id", "market", "origin_code", "dest_code", "label_ja
 # demand bands
 # ----------------------------------------------------------------------------
 bands = [
-    ("D1", "閑散平日昼", "火曜・水曜の10〜16時発・閑散期（国際線は閑散期の平日出発）", "L", "L", 0.15, 0.25, "旅客シェアは分析者の仮定（感応度分析で検証）"),
-    ("D2", "通常", "通常期の平日・朝夕ピーク以外（国際線は通常期の平日出発）", "R", "R", 0.35, 0.40, "同上"),
-    ("D3", "高需要時間帯", "金曜18〜20時発・月曜7〜8時発・日曜夕方発（国際線は通常期の週末出発）", "R", "R", 0.25, 0.20, "ANAは同じRシーズンのマイルだが特典枠が極端に少ない"),
-    ("D4", "繁忙期", "3連休・年末年始・GW・お盆（ANA Hシーズン）", "H", "H", 0.25, 0.15, "ANA国内線の2026年Hシーズンは91日（年の25%）"),
+    ("D1", "閑散平日昼", "火曜・水曜の10〜16時発・閑散期（国際線は閑散期の平日出発）", "L", "L", "base", "L", 0.15, 0.25, "旅客シェアは分析者の仮定（感応度分析で検証）"),
+    ("D2", "通常", "通常期の平日・朝夕ピーク以外（国際線は通常期の平日出発）", "R", "R", "base", "R", 0.35, 0.40, "同上"),
+    ("D3", "高需要時間帯", "金曜18〜20時発・月曜7〜8時発・日曜夕方発（国際線は通常期の週末出発）", "R", "R", "base", "R", 0.25, 0.20, "ANAは同じRシーズンのマイルだが特典枠が極端に少ない"),
+    ("D4", "繁忙期", "3連休・年末年始・GW・お盆（ANA Hシーズン）", "H", "H", "base", "H", 0.25, 0.15, "ANA国内線の2026年Hシーズンは91日（年の25%）。JALはファーストのみシーズン制"),
 ]
-write("demand_bands.csv", ["band_id", "label_ja", "description_ja", "ana_dom_season", "ana_intl_season", "traveler_weight", "calendar_share", "notes"], bands)
+write("demand_bands.csv", ["band_id", "label_ja", "description_ja", "ana_dom_season", "ana_intl_season", "jal_dom_season", "jal_intl_season", "traveler_weight", "calendar_share", "notes"], bands)
 
 # ----------------------------------------------------------------------------
 # award miles
@@ -130,8 +130,7 @@ for route in ("TYO-NYC", "TYO-LON"):
 
 write("award_miles.csv", ["carrier", "route_id", "cabin", "basis", "season", "miles", "source_id", "confidence", "notes"], am)
 
-# JAL season mapping for F: the model maps JAL seasons as 'base'; F rows use L/R/H so we also add a 'base' alias = R for safety
-# (handled in model via season_for: JAL -> 'base'; F cabins are evaluated with explicit season in run_analysis if present)
+# JAL First uses L/R/H rows; the model maps a band to JAL seasons via demand_bands.jal_intl_season when no 'base' row exists.
 
 # ----------------------------------------------------------------------------
 # award cash costs (RT unless basis=ow)
@@ -261,9 +260,9 @@ for route, cityalt in (("TYO-BKK", ("タイ国際航空/スクート", (60000, 7
     alt(route, "Y", "ZIPAIR", "Standard（税込2万円台片道）", "rt", scale((46000, 54000, 65000)), "near", extra=15000, src="ZIPAIR_SALES_2026", conf="B/EST",
         notes="THANKS SALE バンコク22,600/シンガポール15,680円（税抜）→税込2万円台。受託手荷物7,500円/個")
     for c in ("ANA", "JAL"):
-        alt(route, "C", c, "ビジネス（セール〜通常）", "rt", scale((236600 if route == "TYO-BKK" else 304600, 280000 if route == "TYO-BKK" else 330000, 350000 if route == "TYO-BKK" else 400000), d4=(400000, 460000, 550000)), "same", own=c, src="INTL_FARES_2026", conf="B/EST",
-            notes="ANA 2026-10セール ビジネス バンコク236,600/シンガポール304,600円〜")
-    alt(route, "C", "シンガポール航空/マレーシア航空", "ビジネス セール", "rt", scale((179670, 256420, 311190), d4=(400000, 460000, 550000)), "near", src="INTL_FARES_2026", conf="B/EST",
+        alt(route, "C", c, "ビジネス（セール〜通常）", "rt", scale((236600 if route == "TYO-BKK" else 304600, 280000 if route == "TYO-BKK" else 330000, 350000 if route == "TYO-BKK" else 400000)), "same", own=c, src="INTL_FARES_2026", conf="B/EST",
+            notes="ANA 2026-10セール ビジネス バンコク236,600/シンガポール304,600円〜。通常期以降は係数推定")
+    alt(route, "C", "シンガポール航空/マレーシア航空", "ビジネス セール", "rt", scale((179670, 256420, 311190)), "near", src="INTL_FARES_2026", conf="B/EST",
         notes="マレーシア航空179,670円（2026-10）、SQ 256,420円（2026-03）〜311,190円（2026-02）")
 # Hawaii Y / PY / C
 for c in ("ANA", "JAL"):
@@ -277,7 +276,7 @@ for c in ("ANA", "JAL"):
     alt("TYO-HNL", "PY", c, "プレミアムエコノミー", "rt", scale((200000, 220000, 250000), d4=(330000, 400000, 480000)), "same", own=c, src="INTL_FARES_2026", conf="B/EST", notes="ANAハワイ プレエコ セール200,000円〜（2026-10）")
 alt("TYO-HNL", "PY", "ZIPAIR", "Full-Flat（プレエコ代替としては過剰品質）", "rt", {"D1": (160000, 175000, 200000), "D2": (195000, 205000, 220000), "D3": (205000, 215000, 235000), "D4": (230000, 260000, 320000)}, "near", extra=20000, src="ZIPAIR_SALES_2026", conf="B/EST", notes="Full-Flat 94,250〜95,000円（片道税抜）、セール『7万円台』")
 for c in ("ANA", "JAL"):
-    alt("TYO-HNL", "C", c, "ビジネス（セール〜通常）", "rt", scale((350000, 420000, 500000), d4=(650000, 750000, 900000)), "same", own=c, src="EST", conf="EST",
+    alt("TYO-HNL", "C", c, "ビジネス（セール〜通常）", "rt", scale((350000, 420000, 500000), d4=(700000, 880000, 1250000)), "same", own=c, src="EST", conf="EST",
         notes="ANA/JALハワイ ビジネスの2026年セール絶対額は未取得。ブログ推計の正規60〜80万円・東南アジアC実例から推定（要ギャップ調査）")
 alt("TYO-HNL", "C", "ZIPAIR", "ZIP Full-Flat（180°フルフラット・1-2-1）", "rt", {"D1": (160000, 175000, 200000), "D2": (195000, 205000, 220000), "D3": (205000, 215000, 235000), "D4": (230000, 260000, 320000)}, "near", extra=20000, src="ZIPAIR_SALES_2026", conf="B/EST",
     notes="Full-Flat 94,250〜95,000円（片道税抜、通常）、セール実例『7万円台』。諸税＋座席指定料＋手荷物をextraに計上。機内食・ラウンジ無し")
@@ -291,7 +290,7 @@ alt("TYO-NYC", "Y", "ZIPAIR", "Standard LAX（NYには就航せず、西海岸�
     notes="同等役務ではない（ロサンゼルス）ため equivalence=lower として V_real から除外")
 for c in ("ANA", "JAL"):
     alt("TYO-NYC", "PY", c, "プレミアムエコノミー", "rt", scale((280000, 320000, 360000), d4=(500000, 600000, 720000)), "same", own=c, src="EST", conf="EST", notes="ANA/JAL北米プレエコのセール絶対額は未取得。EVA羽田–SFO 322,840円表示、エアプレミア片道58,960円から推定")
-alt("TYO-NYC", "PY", "エバー航空/エアプレミア", "プレミアムエコノミー（西海岸）", "rt", scale((120000, 200000, 322840), d4=(350000, 420000, 500000)), "near", src="INTL_FARES_2026", conf="B/EST", notes="エアプレミア成田–LA片道58,960円、EVA羽田–SFO往復322,840円表示")
+alt("TYO-NYC", "PY", "エバー航空/エアプレミア", "プレミアムエコノミー（西海岸：NYと同等役務ではない）", "rt", scale((120000, 200000, 322840), d4=(350000, 420000, 500000)), "lower", src="INTL_FARES_2026", conf="B/EST", notes="エアプレミア成田–LA片道58,960円、EVA羽田–SFO往復322,840円表示。ロサンゼルス線のため equivalence=lower（参考）")
 for c in ("ANA", "JAL"):
     alt("TYO-NYC", "C", c, "ビジネス（タイムセール〜通常）", "rt", {"D1": (560000, 620000, 700000), "D2": (700000, 858230, 983230), "D3": (800000, 950000, 1100000), "D4": (1000000, 1200000, 1500000)}, "same", own=c, src="VALUATION_NOTE", conf="B/C",
         notes="ANA東京–NYビジネス タイムセール560,000円〜（tabiris 2026-10-20）、通常期サンプル858,230〜983,230円（比較記事）")
@@ -300,8 +299,8 @@ alt("TYO-NYC", "C", "外資系（EVA/CI/大韓/UA等）", "ビジネス（経由
 for c in ("ANA", "JAL"):
     alt("TYO-NYC", "F", c, "ファースト（現金）", "rt", {"D1": (1500000, 1725020, 2000000), "D2": (1800000, 2200000, 2567050), "D3": (2000000, 2400000, 2800000), "D4": (2400000, 2800000, 3200000)}, "same", own=c, src="VALUATION_NOTE", conf="C",
         notes="ブログ引用：NYファースト 1,725,020円（happy-mi-life 2020）、2,567,050円、280万円（burio）。セールは存在しない")
-alt("TYO-NYC", "F", "外資系ビジネス（フルフラット）", "ファースト代替＝ビジネス最安（シート同等性は劣る）", "rt", {"D1": (420000, 500000, 600000), "D2": (500000, 600000, 720000), "D3": (560000, 680000, 820000), "D4": (750000, 900000, 1100000)}, "lower", src="EST", conf="EST",
-    notes="ファーストの『同等役務』は定義困難。equivalence=lower で参考のみ")
+alt("TYO-NYC", "F", "外資系ビジネス（フルフラット）", "ファースト代替＝ビジネス最安（シート同等性は劣る）", "rt", {"D1": (420000, 500000, 600000), "D2": (500000, 600000, 720000), "D3": (560000, 680000, 820000), "D4": (750000, 900000, 1100000)}, "near", src="EST", conf="EST",
+    notes="ファーストのセール市場は存在しないため、最安追求プロファイル（N）ではフルフラット・ビジネスを現実的代替とみなす（equivalence=near）。同一会社プロファイル（S）では正規Fを分子にする")
 # London Y / PY / C / F
 for c in ("ANA", "JAL"):
     alt("TYO-LON", "Y", c, "エコノミー（セール〜通常）", "rt", {"D1": (110000, 126000, 150000), "D2": (170000, 200000, 227110), "D3": (190000, 230000, 270000), "D4": (260000, 320000, 400000)}, "same", own=c, src="INTL_FARES_2026", conf="B/EST",
@@ -318,14 +317,22 @@ alt("TYO-LON", "C", "エティハド/カタール/ターキッシュ", "ビジ�
 for c in ("ANA", "JAL"):
     alt("TYO-LON", "F", c, "ファースト（現金）", "rt", {"D1": (2400000, 2800000, 2915000), "D2": (2600000, 2915000, 3200000), "D3": (2700000, 3000000, 3400000), "D4": (2900000, 3300000, 3800000)}, "same", own=c, src="VALUATION_NOTE", conf="C",
         notes="ブログ引用：欧州ファースト往復 約295万円／2,915,000円（dietmiler）、ロンドンF片道244万円（Travel Kurarin）")
-alt("TYO-LON", "F", "外資系ビジネス（フルフラット）", "ファースト代替＝ビジネス最安", "rt", {"D1": (311000, 327000, 400000), "D2": (400000, 480000, 560000), "D3": (450000, 540000, 640000), "D4": (600000, 720000, 900000)}, "lower", src="INTL_FARES_2026", conf="B/EST", notes="参考のみ（lower）")
+alt("TYO-LON", "F", "外資系ビジネス（フルフラット）", "ファースト代替＝ビジネス最安", "rt", {"D1": (311000, 327000, 400000), "D2": (400000, 480000, 560000), "D3": (450000, 540000, 640000), "D4": (600000, 720000, 900000)}, "near", src="INTL_FARES_2026", conf="B/EST", notes="プロファイルNではフルフラット・ビジネスをファーストの現実的代替とみなす")
 # Sydney Y / C
 for c in ("ANA", "JAL"):
     alt("TYO-SYD", "Y", c, "エコノミー（セール〜通常）", "rt", scale((128000, 145000, 170000)), "same", own=c, src="INTL_FARES_2026", conf="B/EST", notes="ANAシドニー128,000円〜（2026-10セール）")
 alt("TYO-SYD", "Y", "外資系/経由", "エコノミー（経由含む）", "rt", scale((110000, 130000, 155000)), "near", src="EST", conf="EST", notes="豪州線の外資系2026年セール実例は未取得。直行セール比0.85の推定")
 for c in ("ANA", "JAL"):
-    alt("TYO-SYD", "C", c, "ビジネス", "rt", scale((400000, 470000, 550000), d4=(650000, 780000, 950000)), "same", own=c, src="EST", conf="EST", notes="豪州ビジネスのセール実例未取得。東南アジアC（30万）と北米C（56万）の中間の推定")
+    alt("TYO-SYD", "C", c, "ビジネス", "rt", scale((400000, 470000, 550000), d4=(800000, 990000, 1375000)), "same", own=c, src="EST", conf="EST", notes="豪州ビジネスのセール実例未取得。東南アジアC（30万）と北米C（56万）の中間の推定")
 
+# guard: for each (route, cabin, provider, product) the mode price must be non-decreasing D1<=D2<=D3<=D4
+_chk = {}
+for row in ca:
+    _chk.setdefault((row[0], row[1], row[3], row[4]), {})[row[2]] = row[7]
+for key, d in _chk.items():
+    seq = [d.get(b) for b in ("D1", "D2", "D3", "D4") if d.get(b) is not None]
+    if any(a > b_ for a, b_ in zip(seq, seq[1:])):
+        raise SystemExit(f"non-monotone demand-band prices for {key}: {seq}")
 write("cash_alternatives.csv", H, ca)
 
 # ----------------------------------------------------------------------------
@@ -344,9 +351,11 @@ avail("JAL", "domestic", "*", {"D1": (0.75, 0.55, 0.90), "D2": (0.45, 0.25, 0.65
 avail("ANA", "international", "economy", {"D1": (0.60, 0.40, 0.80), "D2": (0.40, 0.25, 0.60), "D3": (0.30, 0.15, 0.45), "D4": (0.08, 0.02, 0.20)}, "AVAIL_PRIOR", "EST", "ブログ群の一致した見解（年末年始・GW・夏休みは最難、平日閑散期は取りやすい）に基づく事前分布")
 avail("ANA", "international", "premium", {"D1": (0.45, 0.25, 0.65), "D2": (0.30, 0.15, 0.45), "D3": (0.20, 0.10, 0.35), "D4": (0.05, 0.01, 0.12)}, "AVAIL_PRIOR", "EST", "同上")
 avail("ANA", "international", "business", {"D1": (0.35, 0.15, 0.55), "D2": (0.20, 0.08, 0.35), "D3": (0.12, 0.05, 0.25), "D4": (0.03, 0.005, 0.10)}, "AVAIL_PRIOR", "EST", "ハワイ・北米ビジネスは『半年先でも取れない』『全席空席待ち』という報告")
+avail("ANA", "international", "first", {"D1": (0.25, 0.10, 0.45), "D2": (0.12, 0.04, 0.25), "D3": (0.08, 0.02, 0.18), "D4": (0.02, 0.003, 0.08)}, "AVAIL_PRIOR", "EST", "ファーストは1機8席程度で特典枠はさらに少ない（mile-bible）")
 avail("JAL", "international", "economy", {"D1": (0.55, 0.35, 0.75), "D2": (0.35, 0.20, 0.55), "D3": (0.25, 0.10, 0.40), "D4": (0.05, 0.01, 0.15)}, "AVAIL_PRIOR", "EST", "note集計『エコノミーの基本マイル日は存在するがビジネスは限られる』『基本マイル日は月の半分、全てGW後』")
 avail("JAL", "international", "premium", {"D1": (0.40, 0.20, 0.60), "D2": (0.25, 0.10, 0.40), "D3": (0.15, 0.05, 0.30), "D4": (0.03, 0.005, 0.10)}, "AVAIL_PRIOR", "EST", "")
 avail("JAL", "international", "business", {"D1": (0.30, 0.10, 0.50), "D2": (0.15, 0.05, 0.30), "D3": (0.10, 0.03, 0.20), "D4": (0.02, 0.003, 0.08)}, "AVAIL_PRIOR", "EST", "The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る")
+avail("JAL", "international", "first", {"D1": (0.25, 0.10, 0.45), "D2": (0.12, 0.04, 0.25), "D3": (0.08, 0.02, 0.18), "D4": (0.02, 0.003, 0.08)}, "AVAIL_PRIOR", "EST", "ファーストはPLUS対象外・キャンセル待ち可。席数が少ない")
 write("availability.csv", ["carrier", "market", "cabin_group", "band_id", "p_award", "p_low", "p_high", "source_id", "confidence", "notes"], av)
 
 # ----------------------------------------------------------------------------
@@ -399,17 +408,20 @@ write("plus_caps.csv", ["carrier", "route_id", "cabin", "basis", "cap_miles", "s
 # floor rates
 # ----------------------------------------------------------------------------
 fr = [
-    ("ANA", "ANA SKY コイン", "1〜9,999マイル（全会員）", 1.0, 1, 0, "ANA_SKYCOIN", "B", ""),
-    ("ANA", "ANA SKY コイン", "一般会員・10,000マイル以上", 1.2, 10000, 1, "ANA_SKYCOIN", "C", "代表値：一般会員の実質フロア（公式表の本文は未取得）"),
-    ("ANA", "ANA SKY コイン", "ANAゴールド/SFC・50,000マイル以上", 1.6, 50000, 0, "ANA_SKYCOIN", "B", ""),
-    ("ANA", "ANA SKY コイン", "プレミアムメンバー・50,000〜200,000マイル", 1.7, 50000, 0, "ANA_SKYCOIN", "A", "上限"),
-    ("ANA", "他社ポイント交換（楽天等）", "最大80%・2026-04-22以降は年度3口目から50%", 0.8, 1, 0, "ANA_POINT_EXCH", "B", "現金に近い下限（上限・逓減あり）"),
-    ("JAL", "e JALポイント", "10,000マイル単位の交換", 1.5, 10000, 1, "JAL_EJAL", "A", "代表値：航空券・ツアー購入に限定、1年期限"),
-    ("JAL", "e JALポイント", "1,000マイル単位の交換", 1.0, 1000, 0, "JAL_EJAL", "A", ""),
-    ("JAL", "JALクーポン", "10,000マイル→12,000円相当", 1.2, 10000, 0, "JAL_EJAL", "B", ""),
-    ("JAL", "Amazonギフト等", "10,000マイル→8,000円相当", 0.8, 10000, 0, "JAL_AMAZON", "B", "現金に近い下限"),
+    # carrier, instrument, condition, yen/mile, min_miles, representative, kind, source, confidence, notes
+    ("ANA", "ANA SKY コイン", "1〜9,999マイル（全会員）", 1.0, 1, 0, "coin", "ANA_SKYCOIN", "B", ""),
+    ("ANA", "ANA SKY コイン", "一般会員・10,000マイル以上", 1.2, 10000, 1, "coin", "ANA_SKYCOIN", "C", "代表値：一般会員の実質フロア（公式表の本文は未取得）"),
+    ("ANA", "ANA SKY コイン", "ANAゴールド/SFC・50,000マイル以上", 1.6, 50000, 0, "coin", "ANA_SKYCOIN", "B", ""),
+    ("ANA", "ANA SKY コイン", "プレミアムメンバー・50,000〜200,000マイル", 1.7, 50000, 0, "coin", "ANA_SKYCOIN", "A", "上限"),
+    ("ANA", "他社ポイント交換（楽天等）", "最大80%（年度2口目まで）", 0.8, 1, 1, "cash", "ANA_POINT_EXCH", "B", "現金に近い下限の代表値"),
+    ("ANA", "他社ポイント交換（楽天等）", "2026-04-22以降の年度3口目以降（50%）", 0.4, 1, 0, "cash", "ANA_POINT_EXCH", "B", "大量交換時の下限"),
+    ("JAL", "e JALポイント", "10,000マイル単位の交換", 1.5, 10000, 1, "coin", "JAL_EJAL", "A", "代表値：航空券・ツアー購入に限定、1年期限"),
+    ("JAL", "e JALポイント", "1,000マイル単位の交換", 1.0, 1000, 0, "coin", "JAL_EJAL", "A", ""),
+    ("JAL", "JALクーポン", "10,000マイル→12,000円相当", 1.2, 10000, 0, "coin", "JAL_EJAL", "B", ""),
+    ("JAL", "Amazonギフト等", "10,000マイル→8,000円相当", 0.8, 10000, 1, "cash", "JAL_AMAZON", "B", "現金に近い下限の代表値"),
+    ("JAL", "Amazonギフト等", "少額交換・キャンペーン外", 0.5, 1000, 0, "cash", "JAL_AMAZON", "EST", "下限の幅（推定）"),
 ]
-write("floor_rates.csv", ["carrier", "instrument", "condition_ja", "yen_per_mile", "min_miles", "representative", "source_id", "confidence", "notes"], fr)
+write("floor_rates.csv", ["carrier", "instrument", "condition_ja", "yen_per_mile", "min_miles", "representative", "kind", "source_id", "confidence", "notes"], fr)
 
 # ----------------------------------------------------------------------------
 # anchors: the 'regular fare' numerators used by mileage blogs (recorded, NOT used as value basis)

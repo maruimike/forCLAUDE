@@ -53,27 +53,25 @@ def _case_label(r) -> str:
 
 
 # ----------------------------------------------------------------------
-def fig_anchor_vs_real(summary: pd.DataFrame, anchors: pd.DataFrame, out: Path, floor_rate: float | None = None, title: str | None = None):
-    """Dumbbell: anchored (regular-fare) yen/mile vs traveler-weighted real RPP."""
-    if "anchored_yen_per_mile" in summary.columns:
-        df = summary.dropna(subset=["anchored_yen_per_mile"]).copy()
-    else:
-        df = summary.merge(anchors[["carrier", "route_id", "cabin", "anchored_yen_per_mile", "anchor_type"]],
-                           on=["carrier", "route_id", "cabin"], how="inner")
+def fig_anchor_vs_real(summary: pd.DataFrame, anchors: pd.DataFrame, out: Path, floor_rate: float | None = None, title: str | None = None,
+                       col_main: str = "rpp_N_wavg", col_alt: str = "rpp_S_wavg"):
+    """Dumbbell: anchored (regular-fare) yen/mile vs traveller-weighted RPP for both consumer profiles."""
+    df = summary.dropna(subset=["anchored_yen_per_mile"]).copy()
     df = df.sort_values("anchored_yen_per_mile", ascending=True).reset_index(drop=True)
     n = len(df)
-    fig, ax = plt.subplots(figsize=(9, 0.42 * n + 1.8))
+    fig, ax = plt.subplots(figsize=(9.5, 0.42 * n + 1.8))
     y = np.arange(n)
     for i, r in df.iterrows():
-        ax.plot([r.rpp_eff_weighted, r.anchored_yen_per_mile], [i, i], color=GRID, lw=2, zorder=1)
-    ax.scatter(df.anchored_yen_per_mile, y, s=46, color=GRAY_DEEMPH, zorder=2, label="見せかけの換算価値（正規運賃 ÷ 最低マイル、現金負担控除なし）")
-    ax.scatter(df.rpp_eff_weighted, y, s=52, color=BLUE, zorder=3, label="実質購買力 RPP（代替最安価格 − 現金負担）÷ 実効マイル")
+        ax.plot([min(r[col_main], r[col_alt]), r.anchored_yen_per_mile], [i, i], color=GRID, lw=2, zorder=1)
+    ax.scatter(df.anchored_yen_per_mile, y, s=46, color=GRAY_DEEMPH, zorder=2, label="見せかけの換算値（正規運賃 ÷ 最低マイル、現金負担・空席確率を無視）")
+    ax.scatter(df[col_alt], y, s=46, color=ORANGE, zorder=3, label="RPP 同一会社利用プロファイル（S）：ANA/JALの有償運賃が代替")
+    ax.scatter(df[col_main], y, s=52, color=BLUE, zorder=4, label="RPP 最安追求プロファイル（N）：LCC・他社・新幹線・ZIPAIRも代替")
     bbox = dict(boxstyle="round,pad=0.15", fc=SURFACE, ec="none", alpha=0.9)
     for i, r in df.iterrows():
         ax.text(r.anchored_yen_per_mile + 0.15, i, f"{r.anchored_yen_per_mile:.1f}", va="center", fontsize=8, color=INK2)
-        ax.text(r.rpp_eff_weighted + 0.15, i + 0.02, f"{r.rpp_eff_weighted:.2f}", va="center", ha="left", fontsize=8, color=INK, bbox=bbox)
+        ax.text(max(r[col_main], r[col_alt]) + 0.15, i + 0.02, f"{r[col_main]:.2f} / {r[col_alt]:.2f}", va="center", ha="left", fontsize=7.5, color=INK, bbox=bbox)
     if floor_rate:
-        ax.axvline(floor_rate, color=AXIS, lw=1, ls="-", label=f"現金等価フロア（コイン/ポイント交換）≈ {floor_rate:.1f}円")
+        ax.axvline(floor_rate, color=AXIS, lw=1, ls="-", label=f"コイン/ポイント交換のフロア ≈ {floor_rate:.1f}円")
     ax.set_yticks(y)
     ax.set_yticklabels([_case_label(r) for _, r in df.iterrows()], fontsize=9)
     ax.set_xlabel("1マイルあたりの円換算値（円/マイル）")
@@ -219,7 +217,7 @@ def fig_waterfall(steps: list[tuple[str, float]], out: Path, title: str, unit="�
 
 
 def fig_cash_vs_miles_by_band(results: pd.DataFrame, bands: pd.DataFrame, cases: list[tuple[str, str, str]], out: Path):
-    """Small multiples: for selected cases, cash alternative price and effective miles by band (indexed to D1 = 100)."""
+    """Small multiples: for selected cases, cash alternative price and expected miles consumed by band (indexed to D1 = 100)."""
     n = len(cases)
     fig, axes = plt.subplots(1, n, figsize=(3.2 * n + 1, 3.6), sharey=True)
     if n == 1:
@@ -230,9 +228,9 @@ def fig_cash_vs_miles_by_band(results: pd.DataFrame, bands: pd.DataFrame, cases:
         sub = sub.loc[list(bands["band_id"])]
         x = np.arange(len(sub))
         v_idx = sub.v_real_rt / sub.v_real_rt.iloc[0] * 100
-        m_idx = sub.m_eff_rt / sub.m_eff_rt.iloc[0] * 100
+        m_idx = sub.m_expected_rt / sub.m_expected_rt.iloc[0] * 100
         ax.plot(x, v_idx, marker="o", color=BLUE, lw=2, ms=6, label="現金代替価格")
-        ax.plot(x, m_idx, marker="o", color=ORANGE, lw=2, ms=6, label="実効必要マイル")
+        ax.plot(x, m_idx, marker="o", color=ORANGE, lw=2, ms=6, label="期待消費マイル（合理的経路）")
         ax.set_xticks(x)
         ax.set_xticklabels([blabels[b][:6] for b in sub.index], fontsize=7.5)
         ax.set_title(f"{carrier} {sub.route_label.iloc[0]} {cabin}", fontsize=10)
@@ -255,8 +253,6 @@ def fig_fees_vs_alternative(results: pd.DataFrame, out: Path, band_id: str = "D1
     y = np.arange(n)
     ax.barh(y + 0.18, df.v_real_rt / 1e4, height=0.34, color=BLUE, label="現実的な代替最安価格 V_real（往復・税込）")
     ax.barh(y - 0.18, df.c_cash_rt / 1e4, height=0.34, color=ORANGE, label="特典航空券の現金持ち出し C（燃油＋諸税、往復）")
-    for i, r in df.iterrows():
-        pass
     ax.set_yticks(y)
     ax.set_yticklabels(df.label, fontsize=8.5)
     ax.set_xlabel("万円（往復・1名）")
@@ -274,8 +270,8 @@ def fig_fuel_scenarios(tbl: pd.DataFrame, out: Path):
     palette = [BLUE, ORANGE, AQUA, YELLOW, "#e87ba4", "#008300", "#6250d6", RED]
     for i, cs in enumerate(cases):
         sub = tbl[tbl.case == cs].set_index("scenario_label").loc[scen]
-        ax.plot(range(len(scen)), sub.rpp_base, marker="o", ms=6, lw=2, color=palette[i % len(palette)], label=cs)
-        ax.text(len(scen) - 1 + 0.08, sub.rpp_base.iloc[-1], f"{sub.rpp_base.iloc[-1]:.2f}", fontsize=8, va="center", color=INK2)
+        ax.plot(range(len(scen)), sub.rpp_award, marker="o", ms=6, lw=2, color=palette[i % len(palette)], label=cs)
+        ax.text(len(scen) - 1 + 0.08, sub.rpp_award.iloc[-1], f"{sub.rpp_award.iloc[-1]:.2f}", fontsize=8, va="center", color=INK2)
     ax.axhline(0, color=AXIS, lw=0.8)
     ax.set_xticks(range(len(scen)))
     ax.set_xticklabels(scen, fontsize=8.5)

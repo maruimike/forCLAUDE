@@ -1,10 +1,12 @@
-carrier,instrument,condition_ja,yen_per_mile,min_miles,representative,source_id,confidence,notes
-ANA,ANA SKY コイン,"1〜9,999マイル（全会員）",1.0,1,0,ANA_SKYCOIN,B,
-ANA,ANA SKY コイン,"一般会員・10,000マイル以上",1.2,10000,1,ANA_SKYCOIN,C,代表値：一般会員の実質フロア（公式表の本文は未取得）
-ANA,ANA SKY コイン,"ANAゴールド/SFC・50,000マイル以上",1.6,50000,0,ANA_SKYCOIN,B,
-ANA,ANA SKY コイン,"プレミアムメンバー・50,000〜200,000マイル",1.7,50000,0,ANA_SKYCOIN,A,上限
-ANA,他社ポイント交換（楽天等）,最大80%・2026-04-22以降は年度3口目から50%,0.8,1,0,ANA_POINT_EXCH,B,現金に近い下限（上限・逓減あり）
-JAL,e JALポイント,"10,000マイル単位の交換",1.5,10000,1,JAL_EJAL,A,代表値：航空券・ツアー購入に限定、1年期限
-JAL,e JALポイント,"1,000マイル単位の交換",1.0,1000,0,JAL_EJAL,A,
-JAL,JALクーポン,"10,000マイル→12,000円相当",1.2,10000,0,JAL_EJAL,B,
-JAL,Amazonギフト等,"10,000マイル→8,000円相当",0.8,10000,0,JAL_AMAZON,B,現金に近い下限
+carrier,instrument,condition_ja,yen_per_mile,min_miles,representative,kind,source_id,confidence,notes
+ANA,ANA SKY コイン,"1〜9,999マイル（全会員）",1.0,1,0,coin,ANA_SKYCOIN,B,
+ANA,ANA SKY コイン,"一般会員・10,000マイル以上",1.2,10000,1,coin,ANA_SKYCOIN,C,代表値：一般会員の実質フロア（公式表の本文は未取得）
+ANA,ANA SKY コイン,"ANAゴールド/SFC・50,000マイル以上",1.6,50000,0,coin,ANA_SKYCOIN,B,
+ANA,ANA SKY コイン,"プレミアムメンバー・50,000〜200,000マイル",1.7,50000,0,coin,ANA_SKYCOIN,A,上限
+ANA,他社ポイント交換（楽天等）,最大80%（年度2口目まで）,0.8,1,1,cash,ANA_POINT_EXCH,B,現金に近い下限の代表値
+ANA,他社ポイント交換（楽天等）,2026-04-22以降の年度3口目以降（50%）,0.4,1,0,cash,ANA_POINT_EXCH,B,大量交換時の下限
+JAL,e JALポイント,"10,000マイル単位の交換",1.5,10000,1,coin,JAL_EJAL,A,代表値：航空券・ツアー購入に限定、1年期限
+JAL,e JALポイント,"1,000マイル単位の交換",1.0,1000,0,coin,JAL_EJAL,A,
+JAL,JALクーポン,"10,000マイル→12,000円相当",1.2,10000,0,coin,JAL_EJAL,B,
+JAL,Amazonギフト等,"10,000マイル→8,000円相当",0.8,10000,1,cash,JAL_AMAZON,B,現金に近い下限の代表値
+JAL,Amazonギフト等,少額交換・キャンペーン外,0.5,1000,0,cash,JAL_AMAZON,EST,下限の幅（推定）
