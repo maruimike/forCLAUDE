@@ -3,3 +3,11 @@ HND-ITM,domestic,HND,ITM,羽田-伊丹,国内幹線,新幹線（東京-新大阪
 HND-FUK,domestic,HND,FUK,羽田-福岡,国内幹線,
 HND-CTS,domestic,HND,CTS,羽田-新千歳,国内幹線,
 HND-OKA,domestic,HND,OKA,羽田-那覇,国内幹線,
+TYO-SEL,international,TYO,SEL,東京-ソウル,韓国,ANA Zone2 / JAL 韓国
+TYO-TPE,international,TYO,TPE,東京-台北,東アジア,ANA Zone3 / JAL 台湾
+TYO-BKK,international,TYO,BKK,東京-バンコク,東南アジア,ANA Zone4 / JAL タイ
+TYO-SIN,international,TYO,SIN,東京-シンガポール,東南アジア,ANA Zone4 / JAL シンガポール
+TYO-HNL,international,TYO,HNL,東京-ホノルル,ハワイ,ANA Zone5 / JAL ハワイ
+TYO-NYC,international,TYO,NYC,東京-ニューヨーク,北米,ANA Zone6 / JAL 北米
+TYO-LON,international,TYO,LON,東京-ロンドン,欧州,ANA Zone7 / JAL 欧州
+TYO-SYD,international,TYO,SYD,東京-シドニー,オセアニア,ANA Zone10 / JAL オセアニア

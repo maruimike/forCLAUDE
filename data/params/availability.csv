@@ -1,0 +1,33 @@
+carrier,market,cabin_group,band_id,p_award,p_low,p_high,source_id,confidence,notes
+ANA,domestic,*,D1,0.8,0.6,0.95,AVAIL_PRIOR,EST,固定チャート＋特典枠。幹線のL/R期は355日前発売直後に埋まりやすい一方、平日昼は直前まで残るという定性的報告に基づく事前分布
+ANA,domestic,*,D2,0.55,0.35,0.75,AVAIL_PRIOR,EST,固定チャート＋特典枠。幹線のL/R期は355日前発売直後に埋まりやすい一方、平日昼は直前まで残るという定性的報告に基づく事前分布
+ANA,domestic,*,D3,0.25,0.1,0.4,AVAIL_PRIOR,EST,固定チャート＋特典枠。幹線のL/R期は355日前発売直後に埋まりやすい一方、平日昼は直前まで残るという定性的報告に基づく事前分布
+ANA,domestic,*,D4,0.1,0.03,0.25,AVAIL_PRIOR,EST,固定チャート＋特典枠。幹線のL/R期は355日前発売直後に埋まりやすい一方、平日昼は直前まで残るという定性的報告に基づく事前分布
+JAL,domestic,*,D1,0.75,0.55,0.9,AVAIL_PRIOR,EST,基本マイル枠は『予測残席』連動で繁忙便は早期からPLUS化。公式『基本マイル数で取れる空席がない日は対象外』等の記述に基づく事前分布
+JAL,domestic,*,D2,0.45,0.25,0.65,AVAIL_PRIOR,EST,基本マイル枠は『予測残席』連動で繁忙便は早期からPLUS化。公式『基本マイル数で取れる空席がない日は対象外』等の記述に基づく事前分布
+JAL,domestic,*,D3,0.15,0.05,0.3,AVAIL_PRIOR,EST,基本マイル枠は『予測残席』連動で繁忙便は早期からPLUS化。公式『基本マイル数で取れる空席がない日は対象外』等の記述に基づく事前分布
+JAL,domestic,*,D4,0.05,0.01,0.15,AVAIL_PRIOR,EST,基本マイル枠は『予測残席』連動で繁忙便は早期からPLUS化。公式『基本マイル数で取れる空席がない日は対象外』等の記述に基づく事前分布
+ANA,international,economy,D1,0.6,0.4,0.8,AVAIL_PRIOR,EST,ブログ群の一致した見解（年末年始・GW・夏休みは最難、平日閑散期は取りやすい）に基づく事前分布
+ANA,international,economy,D2,0.4,0.25,0.6,AVAIL_PRIOR,EST,ブログ群の一致した見解（年末年始・GW・夏休みは最難、平日閑散期は取りやすい）に基づく事前分布
+ANA,international,economy,D3,0.3,0.15,0.45,AVAIL_PRIOR,EST,ブログ群の一致した見解（年末年始・GW・夏休みは最難、平日閑散期は取りやすい）に基づく事前分布
+ANA,international,economy,D4,0.08,0.02,0.2,AVAIL_PRIOR,EST,ブログ群の一致した見解（年末年始・GW・夏休みは最難、平日閑散期は取りやすい）に基づく事前分布
+ANA,international,premium,D1,0.45,0.25,0.65,AVAIL_PRIOR,EST,同上
+ANA,international,premium,D2,0.3,0.15,0.45,AVAIL_PRIOR,EST,同上
+ANA,international,premium,D3,0.2,0.1,0.35,AVAIL_PRIOR,EST,同上
+ANA,international,premium,D4,0.05,0.01,0.12,AVAIL_PRIOR,EST,同上
+ANA,international,business,D1,0.35,0.15,0.55,AVAIL_PRIOR,EST,ハワイ・北米ビジネスは『半年先でも取れない』『全席空席待ち』という報告
+ANA,international,business,D2,0.2,0.08,0.35,AVAIL_PRIOR,EST,ハワイ・北米ビジネスは『半年先でも取れない』『全席空席待ち』という報告
+ANA,international,business,D3,0.12,0.05,0.25,AVAIL_PRIOR,EST,ハワイ・北米ビジネスは『半年先でも取れない』『全席空席待ち』という報告
+ANA,international,business,D4,0.03,0.005,0.1,AVAIL_PRIOR,EST,ハワイ・北米ビジネスは『半年先でも取れない』『全席空席待ち』という報告
+JAL,international,economy,D1,0.55,0.35,0.75,AVAIL_PRIOR,EST,note集計『エコノミーの基本マイル日は存在するがビジネスは限られる』『基本マイル日は月の半分、全てGW後』
+JAL,international,economy,D2,0.35,0.2,0.55,AVAIL_PRIOR,EST,note集計『エコノミーの基本マイル日は存在するがビジネスは限られる』『基本マイル日は月の半分、全てGW後』
+JAL,international,economy,D3,0.25,0.1,0.4,AVAIL_PRIOR,EST,note集計『エコノミーの基本マイル日は存在するがビジネスは限られる』『基本マイル日は月の半分、全てGW後』
+JAL,international,economy,D4,0.05,0.01,0.15,AVAIL_PRIOR,EST,note集計『エコノミーの基本マイル日は存在するがビジネスは限られる』『基本マイル日は月の半分、全てGW後』
+JAL,international,premium,D1,0.4,0.2,0.6,AVAIL_PRIOR,EST,
+JAL,international,premium,D2,0.25,0.1,0.4,AVAIL_PRIOR,EST,
+JAL,international,premium,D3,0.15,0.05,0.3,AVAIL_PRIOR,EST,
+JAL,international,premium,D4,0.03,0.005,0.1,AVAIL_PRIOR,EST,
+JAL,international,business,D1,0.3,0.1,0.5,AVAIL_PRIOR,EST,The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る
+JAL,international,business,D2,0.15,0.05,0.3,AVAIL_PRIOR,EST,The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る
+JAL,international,business,D3,0.1,0.03,0.2,AVAIL_PRIOR,EST,The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る
+JAL,international,business,D4,0.02,0.003,0.08,AVAIL_PRIOR,EST,The Goal：ホノルルCは遠い日程で上限張り付き、直前に基本枠が出る

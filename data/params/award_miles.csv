@@ -1,19 +1,105 @@
 carrier,route_id,cabin,basis,season,miles,source_id,confidence,notes
-# --- ANA 国内線（2024-10-27搭乗分〜の固定チャート。2026-05-19刷新後も直行1区間は据え置き）---
 ANA,HND-ITM,Y,ow,L,6000,ANA_DOM_CHART,A/C,0〜300区間マイル帯（帯判定は区間マイル推定）
-ANA,HND-ITM,Y,ow,R,6500,ANA_DOM_CHART,A/C,
-ANA,HND-ITM,Y,ow,H,9000,ANA_DOM_CHART,A/C,
+ANA,HND-ITM,Y,ow,R,6500,ANA_DOM_CHART,A/C,0〜300区間マイル帯（帯判定は区間マイル推定）
+ANA,HND-ITM,Y,ow,H,9000,ANA_DOM_CHART,A/C,0〜300区間マイル帯（帯判定は区間マイル推定）
 ANA,HND-FUK,Y,ow,L,7000,ANA_DOM_CHART,A/C,301〜800帯
-ANA,HND-FUK,Y,ow,R,8500,ANA_DOM_CHART,A/C,
-ANA,HND-FUK,Y,ow,H,10500,ANA_DOM_CHART,A/C,
+ANA,HND-FUK,Y,ow,R,8500,ANA_DOM_CHART,A/C,301〜800帯
+ANA,HND-FUK,Y,ow,H,10500,ANA_DOM_CHART,A/C,301〜800帯
 ANA,HND-CTS,Y,ow,L,7000,ANA_DOM_CHART,A/C,301〜800帯
-ANA,HND-CTS,Y,ow,R,8500,ANA_DOM_CHART,A/C,
-ANA,HND-CTS,Y,ow,H,10500,ANA_DOM_CHART,A/C,
+ANA,HND-CTS,Y,ow,R,8500,ANA_DOM_CHART,A/C,301〜800帯
+ANA,HND-CTS,Y,ow,H,10500,ANA_DOM_CHART,A/C,301〜800帯
 ANA,HND-OKA,Y,ow,L,8000,ANA_DOM_CHART,A/B,801〜1000帯（早見表で東京-沖縄 8000/9500/12000 を確認）
-ANA,HND-OKA,Y,ow,R,9500,ANA_DOM_CHART,A/B,
-ANA,HND-OKA,Y,ow,H,12000,ANA_DOM_CHART,A/B,
-# --- JAL 国内線（2025-06-10発券分〜の基本マイル。シーズン制なし、空席連動のPLUSで上振れ）---
+ANA,HND-OKA,Y,ow,R,9500,ANA_DOM_CHART,A/B,801〜1000帯（早見表で東京-沖縄 8000/9500/12000 を確認）
+ANA,HND-OKA,Y,ow,H,12000,ANA_DOM_CHART,A/B,801〜1000帯（早見表で東京-沖縄 8000/9500/12000 を確認）
 JAL,HND-ITM,Y,ow,base,6500,JAL_DOM_MILES,C,ゾーンC推定（公式のゾーン所属は未確認）
-JAL,HND-FUK,Y,ow,base,8500,JAL_DOM_MILES,A,ゾーンE（公式スニペットで東京-福岡=Eを確認）
+JAL,HND-FUK,Y,ow,base,8500,JAL_DOM_MILES,A,ゾーンE（公式スニペットで東京-福岡=E）
 JAL,HND-CTS,Y,ow,base,8500,JAL_DOM_MILES,A,ゾーンE
 JAL,HND-OKA,Y,ow,base,9500,JAL_DOM_MILES,A,ゾーンF（東京-那覇 9500 を公式スニペットで確認）
+ANA,TYO-SEL,Y,rt,L,12000,ANA_INTL_CHART,B,Zone2 韓国。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SEL,Y,rt,R,15000,ANA_INTL_CHART,B,Zone2 韓国。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SEL,Y,rt,H,24000,ANA_INTL_CHART,B,Zone2 韓国。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SEL,C,rt,L,36000,ANA_INTL_CHART,B,Zone2 韓国。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SEL,C,rt,R,41000,ANA_INTL_CHART,B,Zone2 韓国。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SEL,C,rt,H,50000,ANA_INTL_CHART,B,Zone2 韓国。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-TPE,Y,rt,L,17000,ANA_INTL_CHART,B,Zone3 アジア1。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-TPE,Y,rt,R,20000,ANA_INTL_CHART,B,Zone3 アジア1。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-TPE,Y,rt,H,30000,ANA_INTL_CHART,B,Zone3 アジア1。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-TPE,C,rt,L,48000,ANA_INTL_CHART,A/B,"Zone3 アジア1。L=48,000は東洋経済（改定後）とも一致"
+ANA,TYO-TPE,C,rt,R,53000,ANA_INTL_CHART,A/B,"Zone3 アジア1。L=48,000は東洋経済（改定後）とも一致"
+ANA,TYO-TPE,C,rt,H,65000,ANA_INTL_CHART,A/B,"Zone3 アジア1。L=48,000は東洋経済（改定後）とも一致"
+ANA,TYO-BKK,Y,rt,L,30000,ANA_INTL_CHART,B,Zone4 アジア2。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-BKK,Y,rt,R,35000,ANA_INTL_CHART,B,Zone4 アジア2。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-BKK,Y,rt,H,50000,ANA_INTL_CHART,B,Zone4 アジア2。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-BKK,C,rt,L,80000,ANA_INTL_CHART,B,Zone4 アジア2。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-BKK,C,rt,R,85000,ANA_INTL_CHART,B,Zone4 アジア2。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-BKK,C,rt,H,95000,ANA_INTL_CHART,B,Zone4 アジア2。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SIN,Y,rt,L,30000,ANA_INTL_CHART,B,Zone4 アジア2。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SIN,Y,rt,R,35000,ANA_INTL_CHART,B,Zone4 アジア2。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SIN,Y,rt,H,50000,ANA_INTL_CHART,B,Zone4 アジア2。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SIN,C,rt,L,80000,ANA_INTL_CHART,B,Zone4 アジア2。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SIN,C,rt,R,85000,ANA_INTL_CHART,B,Zone4 アジア2。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SIN,C,rt,H,95000,ANA_INTL_CHART,B,Zone4 アジア2。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-HNL,Y,rt,L,35000,ANA_INTL_CHART,B,Zone5 ハワイ。2026年早見表とも一致
+ANA,TYO-HNL,Y,rt,R,40000,ANA_INTL_CHART,B,Zone5 ハワイ。2026年早見表とも一致
+ANA,TYO-HNL,Y,rt,H,65000,ANA_INTL_CHART,B,Zone5 ハワイ。2026年早見表とも一致
+ANA,TYO-HNL,PY,rt,L,53000,ANA_INTL_CHART,B,Zone5 ハワイ。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-HNL,PY,rt,R,58000,ANA_INTL_CHART,B,Zone5 ハワイ。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-HNL,PY,rt,H,88000,ANA_INTL_CHART,B,Zone5 ハワイ。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-HNL,C,rt,L,80000,ANA_INTL_CHART,A/B,"Zone5 ハワイ。H=135,000はAviation Wire（公式改定告知）とも一致"
+ANA,TYO-HNL,C,rt,R,85000,ANA_INTL_CHART,A/B,"Zone5 ハワイ。H=135,000はAviation Wire（公式改定告知）とも一致"
+ANA,TYO-HNL,C,rt,H,135000,ANA_INTL_CHART,A/B,"Zone5 ハワイ。H=135,000はAviation Wire（公式改定告知）とも一致"
+ANA,TYO-NYC,Y,rt,L,40000,ANA_INTL_CHART,A/B,Zone6 北米。L/Rは公式旧ページ（据置）とも一致
+ANA,TYO-NYC,Y,rt,R,50000,ANA_INTL_CHART,A/B,Zone6 北米。L/Rは公式旧ページ（据置）とも一致
+ANA,TYO-NYC,Y,rt,H,72000,ANA_INTL_CHART,A/B,Zone6 北米。L/Rは公式旧ページ（据置）とも一致
+ANA,TYO-NYC,PY,rt,L,62000,ANA_INTL_CHART,B,Zone6 北米。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-NYC,PY,rt,R,72000,ANA_INTL_CHART,B,Zone6 北米。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-NYC,PY,rt,H,101000,ANA_INTL_CHART,B,Zone6 北米。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-NYC,C,rt,L,100000,ANA_INTL_CHART,A/B,"Zone6 北米。R=105,000は公式告知断片、H=165,000はブログ複数と一致"
+ANA,TYO-NYC,C,rt,R,105000,ANA_INTL_CHART,A/B,"Zone6 北米。R=105,000は公式告知断片、H=165,000はブログ複数と一致"
+ANA,TYO-NYC,C,rt,H,165000,ANA_INTL_CHART,A/B,"Zone6 北米。R=105,000は公式告知断片、H=165,000はブログ複数と一致"
+ANA,TYO-NYC,F,rt,L,150000,ANA_INTL_CHART,B,Zone6 北米。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-NYC,F,rt,R,170000,ANA_INTL_CHART,B,Zone6 北米。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-NYC,F,rt,H,300000,ANA_INTL_CHART,B,Zone6 北米。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-LON,Y,rt,L,45000,ANA_INTL_CHART,B,Zone7 欧州。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-LON,Y,rt,R,55000,ANA_INTL_CHART,B,Zone7 欧州。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-LON,Y,rt,H,78000,ANA_INTL_CHART,B,Zone7 欧州。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-LON,PY,rt,L,67000,ANA_INTL_CHART,B,Zone7 欧州。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-LON,PY,rt,R,77000,ANA_INTL_CHART,B,Zone7 欧州。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-LON,PY,rt,H,107000,ANA_INTL_CHART,B,Zone7 欧州。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-LON,C,rt,L,110000,ANA_INTL_CHART,B,Zone7 欧州。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-LON,C,rt,R,115000,ANA_INTL_CHART,B,Zone7 欧州。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-LON,C,rt,H,180000,ANA_INTL_CHART,B,Zone7 欧州。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-LON,F,rt,L,165000,ANA_INTL_CHART,B/C,"Zone7 欧州。L=165,000は4travel実例（片道82,500）とも一致"
+ANA,TYO-LON,F,rt,R,190000,ANA_INTL_CHART,B/C,"Zone7 欧州。L=165,000は4travel実例（片道82,500）とも一致"
+ANA,TYO-LON,F,rt,H,330000,ANA_INTL_CHART,B/C,"Zone7 欧州。L=165,000は4travel実例（片道82,500）とも一致"
+ANA,TYO-SYD,Y,rt,L,37000,ANA_INTL_CHART,B,Zone10 オセアニア。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SYD,Y,rt,R,45000,ANA_INTL_CHART,B,Zone10 オセアニア。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SYD,Y,rt,H,65000,ANA_INTL_CHART,B,Zone10 オセアニア。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SYD,C,rt,L,80000,ANA_INTL_CHART,B,Zone10 オセアニア。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SYD,C,rt,R,90000,ANA_INTL_CHART,B,Zone10 オセアニア。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+ANA,TYO-SYD,C,rt,H,135000,ANA_INTL_CHART,B,Zone10 オセアニア。非公式転記2件（ana-mile-calc / award-radar）が一致。公式ページ本文は未取得
+JAL,TYO-SEL,Y,ow,base,7500,JAL_INTL_MILES,A,片道基本マイル（往復=2倍）
+JAL,TYO-SEL,C,ow,base,18000,JAL_INTL_MILES,A,片道基本マイル（往復=2倍）
+JAL,TYO-TPE,Y,ow,base,11000,JAL_INTL_MILES,A,片道基本マイル（往復=2倍）
+JAL,TYO-TPE,C,ow,base,24000,JAL_INTL_MILES,B,片道基本マイル（往復=2倍）
+JAL,TYO-BKK,Y,ow,base,13500,JAL_INTL_MILES,B,片道基本マイル（往復=2倍）
+JAL,TYO-BKK,C,ow,base,40000,JAL_INTL_MILES,B,片道基本マイル（往復=2倍）
+JAL,TYO-SIN,Y,ow,base,13000,JAL_INTL_MILES,B,片道基本マイル（往復=2倍）
+JAL,TYO-SIN,C,ow,base,40000,JAL_INTL_MILES,B,片道基本マイル（往復=2倍）
+JAL,TYO-HNL,Y,ow,base,20000,JAL_INTL_MILES,A,片道基本マイル（往復=2倍）
+JAL,TYO-HNL,PY,ow,base,30000,JAL_INTL_MILES,A,片道基本マイル（往復=2倍）
+JAL,TYO-HNL,C,ow,base,43000,JAL_INTL_MILES,A,片道基本マイル（往復=2倍）
+JAL,TYO-NYC,Y,ow,base,27000,JAL_INTL_MILES,A,片道基本マイル（往復=2倍）
+JAL,TYO-NYC,PY,ow,base,40000,JAL_INTL_MILES,A,片道基本マイル（往復=2倍）
+JAL,TYO-NYC,C,ow,base,55000,JAL_INTL_MILES,A,片道基本マイル（往復=2倍）
+JAL,TYO-LON,Y,ow,base,27000,JAL_INTL_MILES,A,片道基本マイル（往復=2倍）
+JAL,TYO-LON,PY,ow,base,40000,JAL_INTL_MILES,A,片道基本マイル（往復=2倍）
+JAL,TYO-LON,C,ow,base,57000,JAL_INTL_MILES,A,片道基本マイル（往復=2倍）
+JAL,TYO-SYD,Y,ow,base,23000,JAL_INTL_MILES,A,片道基本マイル（往復=2倍）
+JAL,TYO-SYD,C,ow,base,45000,JAL_INTL_MILES,A,片道基本マイル（往復=2倍）
+JAL,TYO-NYC,F,ow,L,110000,JAL_INTL_MILES,A,ファーストのみ3シーズン制、PLUS対象外
+JAL,TYO-NYC,F,ow,R,125000,JAL_INTL_MILES,A,ファーストのみ3シーズン制、PLUS対象外
+JAL,TYO-NYC,F,ow,H,140000,JAL_INTL_MILES,A,ファーストのみ3シーズン制、PLUS対象外
+JAL,TYO-LON,F,ow,L,110000,JAL_INTL_MILES,A,ファーストのみ3シーズン制、PLUS対象外
+JAL,TYO-LON,F,ow,R,125000,JAL_INTL_MILES,A,ファーストのみ3シーズン制、PLUS対象外
+JAL,TYO-LON,F,ow,H,140000,JAL_INTL_MILES,A,ファーストのみ3シーズン制、PLUS対象外

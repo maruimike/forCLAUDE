@@ -1,0 +1,9 @@
+carrier,market,band_id,k_p10,k_p50,k_p90,n_obs,source_id,confidence,notes
+JAL,domestic,D1,1.0,1.15,1.6,0,PLUS_PRIOR,EST,閑散平日昼：基本〜小幅上乗せ
+JAL,domestic,D2,1.15,1.6,2.4,0,PLUS_PRIOR,EST,通常期：段階的上乗せ
+JAL,domestic,D3,1.6,2.4,3.5,0,PLUS_PRIOR,EST,金曜夜・月曜朝：予測残席が少なく高倍率。上限4.1〜4.7倍
+JAL,domestic,D4,2.4,3.3,4.1,0,PLUS_PRIOR,EST,"繁忙期：上限（那覇39,000/9,500=4.1倍）近傍に張り付く"
+JAL,international,D1,1.0,1.3,2.0,0,PLUS_PRIOR,EST,
+JAL,international,D2,1.2,1.8,3.0,0,PLUS_PRIOR,EST,
+JAL,international,D3,1.5,2.3,3.6,0,PLUS_PRIOR,EST,
+JAL,international,D4,2.5,3.6,6.0,0,PLUS_PRIOR,EST,"The Goal：ホノルルC 遠い日程で往復289,000（当時上限、基本の3.6倍）に張り付き"

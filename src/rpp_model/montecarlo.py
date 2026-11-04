@@ -33,9 +33,9 @@ def simulate_case(p: Params, carrier: str, route_id: str, cabin: str, band_id: s
     rng = np.random.default_rng(seed)
     V = _triangular(rng, base["v_real_low"], base["v_real_rt"], base["v_real_high"], n)
     P = _beta_from_range(rng, base["p_award"], base["p_low"], base["p_high"], n)
-    km = None
-    from .model import plus_multiplier
-    km = plus_multiplier(p, carrier, base["market"], band_id)
+    from .model import plus_multiplier, plus_applies, plus_cap_rt
+    km = plus_multiplier(p, carrier, base["market"], band_id) if plus_applies(carrier, base["market"], cabin) else None
+    cap = plus_cap_rt(p, carrier, route_id, cabin)
     if km is not None:
         K = _triangular(rng, km[0], km[1], km[2], n)
     else:
@@ -45,17 +45,23 @@ def simulate_case(p: Params, carrier: str, route_id: str, cabin: str, band_id: s
     r = base["floor_rate"]
     V_own = base["v_own_rt"] * (V / base["v_real_rt"])  # own-carrier fare co-moves with demand
     m_base = base["m_base_rt"]
-    m_points = V_own / r
+    cost_points = V_own / r
+    cost_award = m_base + C / r
+    dominated = cost_award > cost_points
+    mA = np.where(dominated, cost_points, m_base)
+    cA = np.where(dominated, 0.0, C)
     if K is not None:
         m_plus = K * m_base
-        use_plus = (m_plus + C / r) < m_points
-        m_fb = np.where(use_plus, m_plus, m_points)
-        c_fb = np.where(use_plus, C, 0.0)
+        if cap is not None:
+            m_plus = np.minimum(m_plus, cap)
+        use_plus = (m_plus + C / r) < cost_points
+        mB = np.where(use_plus, m_plus, cost_points)
+        cB = np.where(use_plus, C, 0.0)
     else:
-        m_fb = m_points
-        c_fb = np.zeros(n)
-    m_eff = P * m_base + (1 - P) * m_fb
-    c_exp = P * C + (1 - P) * c_fb
+        mB = cost_points
+        cB = np.zeros(n)
+    m_eff = P * mA + (1 - P) * mB
+    c_exp = P * cA + (1 - P) * cB
     rpp = (V - c_exp) / m_eff
     rpp_base = (V - C) / m_base
     q = np.percentile(rpp, [5, 10, 25, 50, 75, 90, 95])
@@ -66,6 +72,8 @@ def simulate_case(p: Params, carrier: str, route_id: str, cabin: str, band_id: s
         rpp_base_p50=float(np.median(rpp_base)),
         prob_below_floor=float((rpp < r).mean()),
         prob_below_1yen=float((rpp < 1.0).mean()),
+        prob_award_dominated=float(dominated.mean()),
+        prob_base_negative=float((rpp_base < 0).mean()),
         samples=rpp,
     )
 

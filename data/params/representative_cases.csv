@@ -2,3 +2,6 @@ carrier,route_id,cabin,band_id
 JAL,HND-OKA,Y,D3
 ANA,HND-OKA,Y,D4
 ANA,HND-ITM,Y,D2
+ANA,TYO-NYC,C,D4
+JAL,TYO-HNL,C,D2
+ANA,TYO-LON,Y,D1

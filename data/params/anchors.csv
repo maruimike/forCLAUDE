@@ -1,0 +1,20 @@
+carrier,route_id,cabin,anchor_type,anchor_price_jpy,basis,blog_claim_yen_per_mile,source_id,confidence,notes
+ANA,HND-OKA,Y,フレックス（旧普通運賃）,52000,ow,4.5,ANCHOR_DOM_EST,EST,2026年公式運賃表PDFは取得不能。2024〜25年の普通運賃水準（約5〜5.7万円）からの推定。manekaiは普通運賃基準で4〜6円/マイルと主張
+JAL,HND-OKA,Y,フレックス（旧普通運賃）,52000,ow,5.0,ANCHOR_DOM_EST,EST,同上
+ANA,HND-FUK,Y,フレックス,46000,ow,4.0,ANCHOR_DOM_EST,EST,推定
+JAL,HND-FUK,Y,フレックス,46000,ow,4.0,ANCHOR_DOM_EST,EST,推定
+ANA,HND-CTS,Y,フレックス,42000,ow,4.0,ANCHOR_DOM_EST,EST,推定
+JAL,HND-CTS,Y,フレックス,42000,ow,4.0,ANCHOR_DOM_EST,EST,推定
+ANA,HND-ITM,Y,フレックス,30000,ow,3.0,ANCHOR_DOM_EST,EST,推定
+JAL,HND-ITM,Y,フレックス,30000,ow,3.0,ANCHOR_DOM_EST,EST,推定
+ANA,TYO-HNL,C,正規ビジネス運賃（ブログ推計）,700000,rt,10.0,VALUATION_NOTE,C,note くまろぅちゃん『60万〜80万円』
+JAL,TYO-HNL,C,正規ビジネス運賃（ブログ推計）,700000,rt,8.0,VALUATION_NOTE,C,同上
+ANA,TYO-NYC,C,通常期ビジネス運賃サンプル,920000,rt,10.0,VALUATION_NOTE,C,"858,230〜983,230円（2025-12/2026-02サンプル）"
+JAL,TYO-NYC,C,通常期ビジネス運賃サンプル,920000,rt,10.0,VALUATION_NOTE,C,ANAサンプルを流用
+ANA,TYO-NYC,F,正規ファースト運賃（ブログ分子）,2800000,rt,18.0,VALUATION_NOTE,C,"burio 280万円÷15万マイル≒18円、2,567,050円÷165,000＝15.55円"
+JAL,TYO-NYC,F,正規ファースト運賃（ブログ分子）,2800000,rt,16.0,VALUATION_NOTE,C,The Goal：ファースト7〜16円
+ANA,TYO-LON,F,正規ファースト運賃（ブログ分子）,2915000,rt,17.87,VALUATION_NOTE,C,"dietmiler 2,915,000円÷165,000＝17.66〜17.87円"
+JAL,TYO-LON,F,正規ファースト運賃（ブログ分子）,2915000,rt,17.94,VALUATION_NOTE,C,haruwari パリ・ファースト17.94円
+ANA,TYO-LON,C,通常期ビジネス運賃（推定）,950000,rt,10.0,EST,EST,北米Cサンプルと同水準の推定
+JAL,TYO-LON,C,通常期ビジネス運賃（推定）,950000,rt,10.0,VALUATION_NOTE,C,価格.com：JAL 11万マイルでパリ往復ビジネス≒10円（現金約100万円）
+ANA,TYO-SIN,C,正規ビジネス運賃（ブログ分子）,730000,rt,9.12,VALUATION_NOTE,C,"haruwari シンガポール ビジネス9.12円（分母80,000マイル想定で逆算）"

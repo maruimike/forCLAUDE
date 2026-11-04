@@ -37,6 +37,7 @@ PARAM_FILES = [
     "floor_rates.csv",
     "anchors.csv",
 ]
+OPTIONAL_FILES = ["plus_caps.csv"]
 
 
 @dataclass
@@ -51,6 +52,7 @@ class Params:
     floor_rates: pd.DataFrame
     anchors: pd.DataFrame
     sources: pd.DataFrame = field(default_factory=pd.DataFrame)
+    plus_caps: pd.DataFrame = field(default_factory=pd.DataFrame)
 
     @classmethod
     def load(cls, param_dir: str | Path) -> "Params":
@@ -60,6 +62,8 @@ class Params:
             frames[f[:-4]] = pd.read_csv(d / f, comment="#", skipinitialspace=True)
         sources_path = d.parent / "sources.csv"
         sources = pd.read_csv(sources_path) if sources_path.exists() else pd.DataFrame()
+        caps_path = d / "plus_caps.csv"
+        plus_caps = pd.read_csv(caps_path, comment="#", skipinitialspace=True) if caps_path.exists() else pd.DataFrame()
         p = cls(
             routes=frames["routes"],
             bands=frames["demand_bands"],
@@ -71,6 +75,7 @@ class Params:
             floor_rates=frames["floor_rates"],
             anchors=frames["anchors"],
             sources=sources,
+            plus_caps=plus_caps,
         )
         p._normalise()
         p._validate()
@@ -105,6 +110,11 @@ class Params:
         mult = np.where(ac["basis"].str.lower() == "ow", 2.0, 1.0)
         ac["amount_rt_jpy"] = ac["amount_jpy"] * mult
         self.award_cash = ac
+
+        if not self.plus_caps.empty:
+            pc = self.plus_caps.copy()
+            pc["cap_rt"] = np.where(pc["basis"].str.lower() == "ow", pc["cap_miles"] * 2, pc["cap_miles"])
+            self.plus_caps = pc
 
     def _validate(self) -> None:
         required = {
@@ -209,6 +219,23 @@ def plus_multiplier(p: Params, carrier: str, market: str, band_id: str) -> tuple
     return float(r.k_p10), float(r.k_p50), float(r.k_p90)
 
 
+def plus_cap_rt(p: Params, carrier: str, route_id: str, cabin: str) -> float | None:
+    pc = p.plus_caps
+    if pc.empty:
+        return None
+    sel = pc[(pc.carrier == carrier) & (pc.route_id == route_id) & (pc.cabin == cabin)]
+    return float(sel["cap_rt"].iloc[0]) if not sel.empty else None
+
+
+def plus_applies(carrier: str, market: str, cabin: str) -> bool:
+    """JAL 特典航空券PLUS applies to Y/PY/C (and domestic J/F); international First is excluded."""
+    if carrier != "JAL":
+        return False
+    if market == "international" and cabin == "F":
+        return False
+    return True
+
+
 def floor_rate(p: Params, carrier: str) -> tuple[float, str]:
     fr = p.floor_rates
     sel = fr[(fr.carrier == carrier) & (fr.representative == 1)]
@@ -224,14 +251,18 @@ def floor_rate(p: Params, carrier: str) -> tuple[float, str]:
 def compute_case(p: Params, carrier: str, route_id: str, cabin: str, band_id: str,
                  v_override: float | None = None, p_override: float | None = None,
                  k_override: float | None = None, c_override: float | None = None,
-                 r_override: float | None = None) -> dict | None:
+                 r_override: float | None = None, equivalence=("same", "near")) -> dict | None:
     route = p.routes.loc[p.routes.route_id == route_id].iloc[0]
     market = route["market"]
     season = season_for(p, carrier, market, band_id)
     m_base = award_miles_rt(p, carrier, route_id, cabin, season)
+    if m_base is None and carrier == "JAL":
+        row = p.bands.loc[p.bands["band_id"] == band_id].iloc[0]
+        season = row["ana_intl_season"] if market == "international" else row["ana_dom_season"]
+        m_base = award_miles_rt(p, carrier, route_id, cabin, season)
     if m_base is None:
         return None
-    vr = v_real(p, route_id, cabin, band_id)
+    vr = v_real(p, route_id, cabin, band_id, equivalence=equivalence)
     if vr is None:
         return None
     V = float(v_override) if v_override is not None else vr["mode"]
@@ -247,33 +278,45 @@ def compute_case(p: Params, carrier: str, route_id: str, cabin: str, band_id: st
     own = own_carrier_fare(p, carrier, route_id, cabin, band_id)
     V_own = own["mode"] if own else V  # if no own-carrier fare known, assume = V_real
 
-    # fallback path when the standard award seat is not available
-    km = plus_multiplier(p, carrier, market, band_id)
+    # ---- rational path choice -------------------------------------------------
+    # Costs are expressed in miles-equivalent: cash is converted at the floor rate r_floor
+    # (the yen a mile is guaranteed to fetch via SKY coins / e JAL points).
+    cost_points_me = V_own / r_floor                       # buy the cash fare with coins/points, no award needed
+    cost_award_me = m_base + C / r_floor                   # standard award seat + cash fees
+    award_dominated = cost_award_me > cost_points_me       # award is worse than simply buying with coins/points
+    if award_dominated:
+        mA, cA, pathA = cost_points_me, 0.0, "points"
+    else:
+        mA, cA, pathA = m_base, C, "award"
+    km = plus_multiplier(p, carrier, market, band_id) if plus_applies(carrier, market, cabin) else None
     k = None
     if km is not None:
         k = float(k_override) if k_override is not None else km[1]
-    # miles-equivalent cost of each fallback option (cash converted at floor rate)
-    m_points = V_own / r_floor                       # buy the cash fare with coins/points
-    fallback = "points"
-    m_fb, c_fb = m_points, 0.0
+    cap = plus_cap_rt(p, carrier, route_id, cabin)
+    mB, cB, pathB = cost_points_me, 0.0, "points"
+    m_plus = None
     if k is not None:
         m_plus = k * m_base
-        if m_plus + C / r_floor < m_points + 0.0:
-            fallback, m_fb, c_fb = "plus", m_plus, C
-
-    m_eff = p_av * m_base + (1 - p_av) * m_fb
-    c_exp = p_av * C + (1 - p_av) * c_fb
-    rpp_base = (V - C) / m_base
-    rpp_eff = (V - c_exp) / m_eff
-    rpp_fb = (V - c_fb) / m_fb
+        if cap is not None:
+            m_plus = min(m_plus, cap)
+        if m_plus + C / r_floor < cost_points_me:
+            mB, cB, pathB = m_plus, C, "plus"
+    m_eff = p_av * mA + (1 - p_av) * mB
+    c_exp = p_av * cA + (1 - p_av) * cB
+    rpp_base = (V - C) / m_base                            # naive: seat obtained and taken regardless
+    rpp_eff = (V - c_exp) / m_eff                          # expected realised value with rational path choice
+    rpp_fb = (V - cB) / mB
+    m_fb, c_fb, fallback = mB, cB, pathB
     return dict(
         carrier=carrier, route_id=route_id, route_label=route["label_ja"], market=market,
         group=route.get("group", ""), cabin=cabin, band_id=band_id, season=season,
         m_base_rt=m_base, v_real_rt=V, v_real_low=vr["low"], v_real_high=vr["high"],
         v_real_provider=vr["provider"], v_real_product=vr["product"],
         v_own_rt=V_own, c_cash_rt=C, c_components=comp,
-        p_award=p_av, p_low=p_lo, p_high=p_hi, k_plus=k, fallback=fallback,
+        p_award=p_av, p_low=p_lo, p_high=p_hi, k_plus=k, plus_cap_rt=cap, m_plus_rt=m_plus,
+        path_if_available=pathA, path_if_unavailable=pathB, award_dominated=award_dominated, fallback=fallback,
         m_fallback_rt=m_fb, m_eff_rt=m_eff, c_expected_rt=c_exp,
+        cost_award_me=cost_award_me, cost_points_me=cost_points_me,
         rpp_base=rpp_base, rpp_eff=rpp_eff, rpp_fallback=rpp_fb,
         floor_rate=r_floor, floor_instrument=instrument,
     )
@@ -295,8 +338,15 @@ def run_all(p: Params) -> pd.DataFrame:
     for carrier, route_id, cabin in enumerate_cases(p):
         for band_id in p.bands["band_id"]:
             res = compute_case(p, carrier, route_id, cabin, band_id)
-            if res is not None:
-                rows.append(res)
+            if res is None:
+                continue
+            strict = compute_case(p, carrier, route_id, cabin, band_id, equivalence=("same",))
+            if strict is not None:
+                res["v_real_strict_rt"] = strict["v_real_rt"]
+                res["rpp_base_strict"] = strict["rpp_base"]
+                res["rpp_eff_strict"] = strict["rpp_eff"]
+                res["award_dominated_strict"] = strict["award_dominated"]
+            rows.append(res)
     df = pd.DataFrame(rows)
     df = df.merge(p.bands[["band_id", "label_ja", "traveler_weight"]].rename(columns={"label_ja": "band_label"}),
                   on="band_id", how="left")
