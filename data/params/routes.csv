@@ -1,0 +1,5 @@
+route_id,market,origin_code,dest_code,label_ja,group,notes
+HND-ITM,domestic,HND,ITM,羽田-伊丹,国内幹線,新幹線（東京-新大阪）が現金代替の主役
+HND-FUK,domestic,HND,FUK,羽田-福岡,国内幹線,
+HND-CTS,domestic,HND,CTS,羽田-新千歳,国内幹線,
+HND-OKA,domestic,HND,OKA,羽田-那覇,国内幹線,

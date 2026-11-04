@@ -1,0 +1,19 @@
+carrier,route_id,cabin,basis,season,miles,source_id,confidence,notes
+# --- ANA 国内線（2024-10-27搭乗分〜の固定チャート。2026-05-19刷新後も直行1区間は据え置き）---
+ANA,HND-ITM,Y,ow,L,6000,ANA_DOM_CHART,A/C,0〜300区間マイル帯（帯判定は区間マイル推定）
+ANA,HND-ITM,Y,ow,R,6500,ANA_DOM_CHART,A/C,
+ANA,HND-ITM,Y,ow,H,9000,ANA_DOM_CHART,A/C,
+ANA,HND-FUK,Y,ow,L,7000,ANA_DOM_CHART,A/C,301〜800帯
+ANA,HND-FUK,Y,ow,R,8500,ANA_DOM_CHART,A/C,
+ANA,HND-FUK,Y,ow,H,10500,ANA_DOM_CHART,A/C,
+ANA,HND-CTS,Y,ow,L,7000,ANA_DOM_CHART,A/C,301〜800帯
+ANA,HND-CTS,Y,ow,R,8500,ANA_DOM_CHART,A/C,
+ANA,HND-CTS,Y,ow,H,10500,ANA_DOM_CHART,A/C,
+ANA,HND-OKA,Y,ow,L,8000,ANA_DOM_CHART,A/B,801〜1000帯（早見表で東京-沖縄 8000/9500/12000 を確認）
+ANA,HND-OKA,Y,ow,R,9500,ANA_DOM_CHART,A/B,
+ANA,HND-OKA,Y,ow,H,12000,ANA_DOM_CHART,A/B,
+# --- JAL 国内線（2025-06-10発券分〜の基本マイル。シーズン制なし、空席連動のPLUSで上振れ）---
+JAL,HND-ITM,Y,ow,base,6500,JAL_DOM_MILES,C,ゾーンC推定（公式のゾーン所属は未確認）
+JAL,HND-FUK,Y,ow,base,8500,JAL_DOM_MILES,A,ゾーンE（公式スニペットで東京-福岡=Eを確認）
+JAL,HND-CTS,Y,ow,base,8500,JAL_DOM_MILES,A,ゾーンE
+JAL,HND-OKA,Y,ow,base,9500,JAL_DOM_MILES,A,ゾーンF（東京-那覇 9500 を公式スニペットで確認）

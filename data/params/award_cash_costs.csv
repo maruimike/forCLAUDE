@@ -1,0 +1,10 @@
+carrier,route_id,cabin,component,basis,amount_jpy,period_label,source_id,confidence,notes
+# --- 国内線：旅客施設使用料（PFC）のみ。出発空港＋到着空港（片道）。燃油サーチャージは国内線に無し ---
+ANA,HND-ITM,*,PFC,ow,920,2026-09-01以降発券,ANA_PFC,A,羽田580＋伊丹340
+ANA,HND-FUK,*,PFC,ow,690,2026-09-01以降発券,ANA_PFC,A/B,羽田580＋福岡110（福岡はJAL FAQ・ソラシド掲載額）
+ANA,HND-CTS,*,PFC,ow,950,2026-09-01以降発券,ANA_PFC,A/C,羽田580＋新千歳370（新千歳は2026-10-25以降改定、改定後額未取得）
+ANA,HND-OKA,*,PFC,ow,820,2026-09-01以降発券,ANA_PFC,A,羽田580＋那覇240
+JAL,HND-ITM,*,PFC,ow,920,2026-09-01以降発券,JAL_PFC_FAQ,A,同上（PFCは空港共通）
+JAL,HND-FUK,*,PFC,ow,690,2026-09-01以降発券,JAL_PFC_FAQ,A/B,
+JAL,HND-CTS,*,PFC,ow,950,2026-09-01以降発券,JAL_PFC_FAQ,A/C,
+JAL,HND-OKA,*,PFC,ow,820,2026-09-01以降発券,JAL_PFC_FAQ,A,
