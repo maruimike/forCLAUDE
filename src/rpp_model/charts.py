@@ -53,7 +53,7 @@ def _case_label(r) -> str:
 
 
 # ----------------------------------------------------------------------
-def fig_anchor_vs_real(summary: pd.DataFrame, anchors: pd.DataFrame, out: Path, floor_rate: float | None = None):
+def fig_anchor_vs_real(summary: pd.DataFrame, anchors: pd.DataFrame, out: Path, floor_rate: float | None = None, title: str | None = None):
     """Dumbbell: anchored (regular-fare) yen/mile vs traveler-weighted real RPP."""
     if "anchored_yen_per_mile" in summary.columns:
         df = summary.dropna(subset=["anchored_yen_per_mile"]).copy()
@@ -68,16 +68,17 @@ def fig_anchor_vs_real(summary: pd.DataFrame, anchors: pd.DataFrame, out: Path, 
         ax.plot([r.rpp_eff_weighted, r.anchored_yen_per_mile], [i, i], color=GRID, lw=2, zorder=1)
     ax.scatter(df.anchored_yen_per_mile, y, s=46, color=GRAY_DEEMPH, zorder=2, label="見せかけの換算価値（正規運賃 ÷ 最低マイル、現金負担控除なし）")
     ax.scatter(df.rpp_eff_weighted, y, s=52, color=BLUE, zorder=3, label="実質購買力 RPP（代替最安価格 − 現金負担）÷ 実効マイル")
+    bbox = dict(boxstyle="round,pad=0.15", fc=SURFACE, ec="none", alpha=0.9)
     for i, r in df.iterrows():
         ax.text(r.anchored_yen_per_mile + 0.15, i, f"{r.anchored_yen_per_mile:.1f}", va="center", fontsize=8, color=INK2)
-        ax.text(r.rpp_eff_weighted - 0.15, i, f"{r.rpp_eff_weighted:.2f}", va="center", ha="right", fontsize=8, color=INK)
+        ax.text(r.rpp_eff_weighted + 0.15, i + 0.02, f"{r.rpp_eff_weighted:.2f}", va="center", ha="left", fontsize=8, color=INK, bbox=bbox)
     if floor_rate:
         ax.axvline(floor_rate, color=AXIS, lw=1, ls="-", label=f"現金等価フロア（コイン/ポイント交換）≈ {floor_rate:.1f}円")
     ax.set_yticks(y)
     ax.set_yticklabels([_case_label(r) for _, r in df.iterrows()], fontsize=9)
     ax.set_xlabel("1マイルあたりの円換算値（円/マイル）")
     ax.set_xlim(left=0)
-    ax.set_title("「見せかけ」の1マイル価値と実質購買力の乖離")
+    ax.set_title(title or "「見せかけ」の1マイル価値と実質購買力の乖離")
     ax.legend(loc="lower right", fontsize=8)
     ax.grid(axis="y", visible=False)
     _save(fig, out)
@@ -241,4 +242,92 @@ def fig_cash_vs_miles_by_band(results: pd.DataFrame, bands: pd.DataFrame, cases:
     axes[0].legend(loc="upper left", fontsize=8)
     fig.suptitle("需要帯が上がると現金価格より必要マイルの方が速く膨らむか", x=0.01, ha="left", fontsize=12)
     fig.tight_layout(rect=[0, 0, 1, 0.9])
+    _save(fig, out)
+
+
+def fig_fees_vs_alternative(results: pd.DataFrame, out: Path, band_id: str = "D1", cabin: str = "Y"):
+    """Award cash out-of-pocket (fuel + fees + taxes) versus the cheapest realistic cash ticket, international economy."""
+    df = results[(results.market == "international") & (results.cabin == cabin) & (results.band_id == band_id)].copy()
+    df = df.drop_duplicates(subset=["carrier", "route_label"]).sort_values("v_real_rt", ascending=True)
+    df["label"] = df.carrier + " " + df.route_label
+    n = len(df)
+    fig, ax = plt.subplots(figsize=(9, 0.4 * n + 1.8))
+    y = np.arange(n)
+    ax.barh(y + 0.18, df.v_real_rt / 1e4, height=0.34, color=BLUE, label="現実的な代替最安価格 V_real（往復・税込）")
+    ax.barh(y - 0.18, df.c_cash_rt / 1e4, height=0.34, color=ORANGE, label="特典航空券の現金持ち出し C（燃油＋諸税、往復）")
+    for i, r in df.iterrows():
+        pass
+    ax.set_yticks(y)
+    ax.set_yticklabels(df.label, fontsize=8.5)
+    ax.set_xlabel("万円（往復・1名）")
+    ax.set_title(f"特典の現金負担は代替チケット価格に迫る・上回る（{band_id}・エコノミー・2026年11〜12月発券）")
+    ax.legend(loc="lower right", fontsize=8)
+    ax.grid(axis="y", visible=False)
+    _save(fig, out)
+
+
+def fig_fuel_scenarios(tbl: pd.DataFrame, out: Path):
+    """RPP under fuel-surcharge regimes: one line per case, x = scenario (ordered by surcharge level)."""
+    cases = tbl["case"].unique()
+    scen = list(tbl["scenario_label"].unique())
+    fig, ax = plt.subplots(figsize=(9, 4.8))
+    palette = [BLUE, ORANGE, AQUA, YELLOW, "#e87ba4", "#008300", "#6250d6", RED]
+    for i, cs in enumerate(cases):
+        sub = tbl[tbl.case == cs].set_index("scenario_label").loc[scen]
+        ax.plot(range(len(scen)), sub.rpp_base, marker="o", ms=6, lw=2, color=palette[i % len(palette)], label=cs)
+        ax.text(len(scen) - 1 + 0.08, sub.rpp_base.iloc[-1], f"{sub.rpp_base.iloc[-1]:.2f}", fontsize=8, va="center", color=INK2)
+    ax.axhline(0, color=AXIS, lw=0.8)
+    ax.set_xticks(range(len(scen)))
+    ax.set_xticklabels(scen, fontsize=8.5)
+    ax.set_ylabel("(V_real − C)/M_base　円/マイル（通常期 D2）")
+    ax.set_title("燃油サーチャージの水準がマイルの実質価値を左右する")
+    ax.legend(fontsize=8, loc="upper center", bbox_to_anchor=(0.5, -0.12), ncol=3)
+    ax.grid(axis="x", visible=False)
+    _save(fig, out)
+
+
+def fig_plus_caps(caps: pd.DataFrame, base: pd.DataFrame, out: Path):
+    """Dumbbell: JAL base miles vs PLUS cap (one-way), with multiplier labels."""
+    df = caps.merge(base, on=["route_id", "cabin"], how="inner")
+    df["label"] = df.route_label + " " + df.cabin
+    df["mult"] = df.cap_miles / df.base_ow
+    df = df.sort_values("mult", ascending=True).reset_index(drop=True)
+    n = len(df)
+    fig, ax = plt.subplots(figsize=(9, 0.36 * n + 1.8))
+    y = np.arange(n)
+    for i, r in df.iterrows():
+        ax.plot([r.base_ow / 1e3, r.cap_miles / 1e3], [i, i], color=GRID, lw=2, zorder=1)
+    ax.scatter(df.base_ow / 1e3, y, s=40, color=BLUE, zorder=3, label="基本マイル（片道）")
+    ax.scatter(df.cap_miles / 1e3, y, s=40, color=ORANGE, zorder=3, label="特典航空券PLUS 上限（片道）")
+    for i, r in df.iterrows():
+        ax.text(r.cap_miles / 1e3 + 6, i, f"{r.mult:.1f}倍", va="center", fontsize=8, color=INK2)
+    ax.set_yticks(y)
+    ax.set_yticklabels(df.label, fontsize=8.5)
+    ax.set_xlabel("必要マイル数（千マイル・片道）")
+    ax.set_xlim(left=0)
+    ax.set_title("JAL 特典航空券PLUS：基本マイルの4〜9倍まで上がる『二重価格』")
+    ax.legend(loc="lower right", fontsize=8)
+    ax.grid(axis="y", visible=False)
+    _save(fig, out)
+
+
+def fig_tokutabi_weekday(tk: pd.DataFrame, out: Path):
+    """Grouped bars: regular R-season miles vs トクたび Wed–Fri vs Sat–Tue by distance band."""
+    n = len(tk)
+    x = np.arange(n)
+    w = 0.26
+    fig, ax = plt.subplots(figsize=(8.5, 4.2))
+    ax.bar(x - w, tk.regular_R_miles_ow, width=w - 0.02, color=GRAY_DEEMPH, label="通常チャート（Rシーズン）")
+    ax.bar(x, tk.tokutabi_sat_tue_ow, width=w - 0.02, color=SEQ[4], label="トクたびマイル 土〜火 搭乗")
+    ax.bar(x + w, tk.tokutabi_wed_fri_ow, width=w - 0.02, color=BLUE, label="トクたびマイル 水〜金 搭乗")
+    for i, r in tk.iterrows():
+        ax.text(i + w, r.tokutabi_wed_fri_ow + 150, f"{r.tokutabi_wed_fri_ow:,}", ha="center", fontsize=8, color=INK)
+        ax.text(i, r.tokutabi_sat_tue_ow + 150, f"{r.tokutabi_sat_tue_ow:,}", ha="center", fontsize=8, color=INK2)
+        ax.text(i - w, r.regular_R_miles_ow + 150, f"{r.regular_R_miles_ow:,}", ha="center", fontsize=8, color=INK2)
+    ax.set_xticks(x)
+    ax.set_xticklabels([f"{b}区間マイル" for b in tk.distance_band], fontsize=9)
+    ax.set_ylabel("必要マイル（片道）")
+    ax.set_title("ANAも曜日で値付けしている：トクたびマイルの水〜金 vs 土〜火（2026年9月スナップショット）")
+    ax.legend(fontsize=8, loc="upper left")
+    ax.grid(axis="x", visible=False)
     _save(fig, out)

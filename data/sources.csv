@@ -29,3 +29,5 @@ AVAIL_PRIOR,特典枠の空席確率（事前分布）,分析者推定（定性�
 PLUS_PRIOR,JAL特典航空券PLUS 倍率の分布（事前分布）,分析者推定（公式上限・定性的報告に基づく）,https://matsunosuke.jp/jal-award-tickets-plus/ ; https://www.jal.co.jp/jp/ja/jalmile/use/jal/domestic-award/miles/,2026,EST,jal_domestic_award_plus.md KQ4 / day_time_bias_availability.md §2 §8
 ANCHOR_DOM_EST,国内線フレックス運賃（旧普通運賃）の推定値,分析者推定（公式運賃表PDFは取得不能）,https://www.anahd.co.jp/group/pr/pdf/20260319-3-1.pdf ; https://manekai.ameba.jp/creditcard/mileage/value/,2026,EST,valuation_methods_anchoring.md KQ2
 EST,分析者推定（根拠は各行の notes 列）,分析者,—,2026-11,EST,—
+FUEL_HISTORY,燃油サーチャージの推移（2025年同期は2026年9〜10月の約1/2.4）,note 比較旅 / voyageurs / teamelite,https://note.com/hikaku_tabi/n/n2c81a644c854 ; https://voyageurs.jp/fuel-surcharge/ ; https://teamelite.jp/travel/ana-fuel-surcharge-2026/,2026,C,ana_international_award.md Q5
+ANA_TOKUTABI_SNAPSHOT,"ANA公式「今週のトクたびマイル」ページ（2026-09-04取得スナップショット：水〜金 3,500/5,500/6,500/7,500 vs 土〜火 6,000/7,500/9,000/10,000）",ANA公式（GitHub harkingbee/ana-tokutabi-watcher 内の保存HTML）,https://github.com/harkingbee/ana-tokutabi-watcher ; https://www.aviationwire.jp/archives/345987,2026-09-04,A,day_time_bias_availability.md §3

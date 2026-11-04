@@ -133,6 +133,35 @@ def main():
     if tor_frames:
         pd.concat(tor_frames).to_csv(tdir / "sensitivity_tornado.csv", index=False)
 
+    # fuel-surcharge regime scenarios (international, band D2, both carriers)
+    fuel_tbl = None
+    fs_path = Path(args.params) / "fuel_scenarios.csv"
+    if fs_path.exists():
+        from rpp_model.model import award_cash_rt, compute_case
+        fs = pd.read_csv(fs_path, comment="#", skipinitialspace=True)
+        rows_fs = []
+        base_fuel = {r.route_id: None for _, r in p.routes.iterrows()}
+        for carrier, route_id, cabin in cases:
+            if p.routes.set_index("route_id").loc[route_id, "market"] != "international":
+                continue
+            C0, comp = award_cash_rt(p, carrier, route_id, cabin)
+            f_now = comp.get("fuel_surcharge", 0.0)  # RT at the baseline (Nov-Dec 2026)
+            if f_now == 0:
+                continue
+            label = results[(results.carrier == carrier) & (results.route_id == route_id)].route_label.iloc[0]
+            for _, srow in fs.iterrows():
+                f_new = float(srow[route_id]) * 2.0
+                res = compute_case(p, carrier, route_id, cabin, "D2", c_override=C0 - f_now + f_new)
+                if res is None:
+                    continue
+                rows_fs.append(dict(case=f"{carrier} {label} {cabin}", carrier=carrier, route_id=route_id, cabin=cabin,
+                                    scenario_id=srow.scenario_id, scenario_label=srow.label_ja, fuel_ow=float(srow[route_id]),
+                                    c_cash_rt=res["c_cash_rt"], rpp_base=res["rpp_base"], rpp_eff=res["rpp_eff"], award_dominated=res["award_dominated"]))
+        fuel_tbl_all = pd.DataFrame(rows_fs)
+        fuel_tbl_all.to_csv(tdir / "fuel_surcharge_scenarios.csv", index=False)
+        sel = fuel_tbl_all[fuel_tbl_all.case.isin(["ANA 東京-ロンドン Y", "JAL 東京-ロンドン Y", "ANA 東京-ホノルル Y", "JAL 東京-ニューヨーク C", "ANA 東京-ニューヨーク C", "ANA 東京-バンコク Y"])]
+        fuel_tbl = sel if not sel.empty else None
+
     # markdown digest
     md = ["# モデル出力ダイジェスト（自動生成）", ""]
     md.append("## 1. ケース別・旅客加重 RPP と見せかけ換算値")
@@ -166,6 +195,10 @@ def main():
     md.append("")
     md.append("## 5. 市場別プール分布")
     md.append(df_to_markdown(pd.DataFrame(market_rows)))
+    if fuel_tbl is not None:
+        md.append("")
+        md.append("## 5b. 燃油サーチャージ水準別シナリオ（国際線・通常期D2）")
+        md.append(df_to_markdown(fuel_tbl[["case", "scenario_label", "fuel_ow", "c_cash_rt", "rpp_base", "rpp_eff", "award_dominated"]]))
     if tor_frames:
         md.append("")
         md.append("## 6. 感応度（トルネード）")
@@ -178,9 +211,23 @@ def main():
                             for c in sorted(results.carrier.unique())}
         charts.fig_anchor_vs_real(summary.dropna(subset=["anchored_yen_per_mile"]), anchors, fdir / "fig1_anchor_vs_real.png",
                                   floor_rate=float(np.mean(list(floor_by_carrier.values()))))
-        charts.fig_band_heatmap(results, p.bands, fdir / "fig2_rpp_by_demand_band.png")
-        charts.fig_band_heatmap(results, p.bands, fdir / "fig2b_effective_miles_by_band.png", value="m_eff_rt",
-                                title="需要帯別の実効必要マイル数（往復）")
+        charts.fig_band_heatmap(results[results.market == "domestic"], p.bands, fdir / "fig2a_rpp_by_demand_band_domestic.png",
+                                title="需要帯別の実質購買力 RPP（円/マイル）— 国内線")
+        charts.fig_band_heatmap(results[results.market == "international"], p.bands, fdir / "fig2b_rpp_by_demand_band_international.png",
+                                title="需要帯別の実質購買力 RPP（円/マイル）— 国際線")
+        charts.fig_band_heatmap(results[results.market == "international"], p.bands, fdir / "fig2c_rpp_base_if_seat_international.png",
+                                value="rpp_base", title="特典枠が取れた場合の単純値 (V_real − C)/M_base — 国際線（負値＝現金負担が代替価格超）")
+        charts.fig_fees_vs_alternative(results, fdir / "fig6_cash_fees_vs_alternative_D1.png", band_id="D1", cabin="Y")
+        charts.fig_fees_vs_alternative(results, fdir / "fig6b_cash_fees_vs_alternative_D2.png", band_id="D2", cabin="Y")
+        caps = p.plus_caps.copy()
+        base = p.award_miles[(p.award_miles.carrier == "JAL") & (p.award_miles.season == "base")][["route_id", "cabin", "miles"]].rename(columns={"miles": "base_ow"})
+        base = base.merge(p.routes[["route_id", "label_ja"]].rename(columns={"label_ja": "route_label"}), on="route_id")
+        charts.fig_plus_caps(caps[caps.carrier == "JAL"], base, fdir / "fig3b_jal_plus_caps.png")
+        tk_path = Path(args.params).parent / "observations" / "tokutabi_weekday_2026.csv"
+        if tk_path.exists():
+            charts.fig_tokutabi_weekday(pd.read_csv(tk_path), fdir / "fig8_ana_tokutabi_weekday.png")
+        if fuel_tbl is not None:
+            charts.fig_fuel_scenarios(fuel_tbl, fdir / "fig7_fuel_surcharge_scenarios.png")
         charts.fig_montecarlo_ranges(pooled.assign(band_id=""), fdir / "fig4_montecarlo_pooled.png", floor_by_carrier, band_id=None,
                                      title="モンテカルロ：旅客加重 RPP の不確実性レンジ（ケース別）")
         obs_path = Path(args.params).parent / "observations" / "jal_plus_observations.csv"

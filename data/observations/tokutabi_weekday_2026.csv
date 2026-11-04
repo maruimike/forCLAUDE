@@ -1,0 +1,5 @@
+distance_band,zone_label_ja,regular_R_miles_ow,tokutabi_wed_fri_ow,tokutabi_sat_tue_ow,source_id,notes
+0-300,0〜300区間マイル（例：東京-大阪/名古屋）,6500,3500,6000,ANA_TOKUTABI_SNAPSHOT,ANA公式「今週のトクたびマイル」ページ 2026-09-04取得スナップショット（GitHub harkingbee/ana-tokutabi-watcher）
+301-800,301〜800（例：東京-福岡/札幌/広島）,8500,5500,7500,ANA_TOKUTABI_SNAPSHOT,同上
+801-1000,801〜1000（例：東京-沖縄、中部-沖縄）,9500,6500,9000,ANA_TOKUTABI_SNAPSHOT,同上
+1001-2000,1001〜2000（例：東京-石垣）,10500,7500,10000,ANA_TOKUTABI_SNAPSHOT,同上
